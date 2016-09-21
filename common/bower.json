@@ -1,0 +1,32 @@
+{
+  "name": "LearnFontEnd",
+  "description": "LearnFrontEnd Description !",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "FrontEnd",
+    "CSS",
+    "JavaScript",
+    "HTML5",
+    "CSS3"
+  ],
+  "authors": [
+    "Witt"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.jiweitao.cn/",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~3.0.0",
+    "underscore": "~1.8.3",
+    "knockout": "~3.4.0"
+  }
+}
