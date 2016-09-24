@@ -8,49 +8,6 @@
 </head>
 <body>
 
-<h3>text input</h3>
-<p>name:<span data-bind="text:name"></span></p>
-<p>name: <input data-bind="value: name" /></p>
-<p><button data-bind="click:setName">改名为李四</button></p>
-
-<!-- <h3>password input</h3>
-<p>name:<span data-bind="text:password"></span></p>
-<p>password: <input type="password" data-bind="value: password" /></p>
- 
-<h3>textarea</h3>
-<p>remark:<span data-bind="text:remark"></span></p>
-<p>remark: <input data-bind="value: remark" /></p>
-
-<h3>select</h3>
-<p>gender:<span data-bind="text:gender"></span></p>
-<p>gender: 
-    <select data-bind="value: gender">
-        <option value="">--</option>
-        <option value="male">男</option>
-        <option value="female">女</option>
-    <select>
-</p>
-
-<h3>number input</h3>
-<p>age:<span data-bind="text:age"></span></p>
-<p>age: <input data-bind="value: age" /></p> -->
-
-
-<script type="text/javascript">
-    var viewModel = {
-        name: ko.observable("张三"),
-        password: ko.observable('123456'),
-        remark: ko.observable('张三的备注'),
-        gender: ko.observable('male'),
-        age: ko.observable(31),
-        setName: function() {
-            this.name("李四");
-        }
-    };
-    ko.applyBindings(viewModel);
-</script>
-
-
 
 </body>
 </html>

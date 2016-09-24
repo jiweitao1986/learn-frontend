@@ -2,65 +2,53 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>Template</title>
+    <title>value binding</title>
     <script src="../../common/vendor/jquery/dist/jquery.js"></script>
     <script src="../../common/vendor/knockout/dist/knockout.debug.js"></script>
 </head>
 <body>
 
-<div id="first">
-    <h2>Participants</h2>
-    Here are the participants:
-    <div data-bind="template: { name: 'person-template', data: buyer }"></div>
-    <div data-bind="template: { name: 'person-template', data: seller }"></div>
-     
-    <script type="text/html" id="person-template">
-        <h3 data-bind="text: name"></h3>
-        <p>Credits: <span data-bind="text: credits"></span></p>
-    </script>
-     
-    <script type="text/javascript">
-         function MyViewModel() {
-             this.buyer = { name: 'Franklin', credits: 250 };
-             this.seller = { name: 'Mario', credits: 5800 };
-         }
-         ko.applyBindings(new MyViewModel(), $('#first')[0]);
-    </script>
-</div>
+<h3>text input</h3>
+<p>name:<span data-bind="text:name"></span></p>
+<p>name: <input data-bind="value: name" /></p>
+<p><button data-bind="click:setName">改名为李四</button></p>
+
+<!-- <h3>password input</h3>
+<p>name:<span data-bind="text:password"></span></p>
+<p>password: <input type="password" data-bind="value: password" /></p>
+ 
+<h3>textarea</h3>
+<p>remark:<span data-bind="text:remark"></span></p>
+<p>remark: <input data-bind="value: remark" /></p>
+
+<h3>select</h3>
+<p>gender:<span data-bind="text:gender"></span></p>
+<p>gender: 
+    <select data-bind="value: gender">
+        <option value="">--</option>
+        <option value="male">男</option>
+        <option value="female">女</option>
+    <select>
+</p>
+
+<h3>number input</h3>
+<p>age:<span data-bind="text:age"></span></p>
+<p>age: <input data-bind="value: age" /></p> -->
 
 
-<!-- <div id="second">
-    <ul data-bind="template: { name: 'seasonTemplate', foreach: seasons, as: 'season' }"></ul>
-     
-
-    <script type="text/html" id="seasonTemplate">
-        <li>
-            <strong data-bind="text: name"></strong>
-            <ul data-bind="template: { name: 'monthTemplate', foreach: months, as: 'month' }"></ul>
-        </li>
-    </script>
-     
-    <script type="text/html" id="monthTemplate">
-        <li>
-            <span data-bind="text: month"></span>
-            is in
-            <span data-bind="text: season.name"></span>
-        </li>
-    </script>
-     
-    <script>
-        var viewModel = {
-            seasons: ko.observableArray([
-                { name: 'Spring', months: [ 'March', 'April', 'May' ] },
-                { name: 'Summer', months: [ 'June', 'July', 'August' ] },
-                { name: 'Autumn', months: [ 'September', 'October', 'November' ] },
-                { name: 'Winter', months: [ 'December', 'January', 'February' ] }
-            ])
-        };
-        ko.applyBindings(viewModel, $('#second')[0]);
-    </script>
-</div> -->
-
+<script type="text/javascript">
+    var viewModel = {
+        name: ko.observable("张三"),
+        password: ko.observable('123456'),
+        remark: ko.observable('张三的备注'),
+        gender: ko.observable('male'),
+        age: ko.observable(31),
+        setName: function() {
+            this.name("李四");
+        }
+    };
+    ko.applyBindings(viewModel);
+</script>
 
 
 
