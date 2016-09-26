@@ -1,5 +1,5 @@
 {
-  "name": "LearnFontEnd",
+  "name": "LearnFrontEnd",
   "description": "LearnFrontEnd Description !",
   "main": "",
   "moduleType": [],
@@ -27,6 +27,9 @@
   "dependencies": {
     "jquery": "~3.0.0",
     "underscore": "~1.8.3",
-    "knockout": "~3.4.0"
+    "knockout": "~3.4.0",
+    "qunit": "~2.0.1",
+    "jasmine-core": "jasmine#~2.5.2",
+    "requirejs": "~2.3.2"
   }
 }
