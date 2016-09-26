@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>subscribable</title>
+    <link rel="stylesheet" href="../../common/vendor/qunit/qunit/qunit.css">
+    <script src="../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../common/vendor/qunit/qunit/qunit.js"></script>
+    <script src="../../common/vendor/knockout/dist/knockout.debug.js"></script>
+</head>
+<body>
+
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+<script>
+    QUnit.module('属性测试');
+
+
+    //监听subscribeble对象
+    QUnit.test('监听subscribeble对象', function(assert) {
+        var instance = new ko.subscribable();
+        var first;
+        var second;
+
+        //添加第1个订阅
+        instance.subscribe(function (newValue) {
+            first = 'first=' + newValue;
+        });
+
+        //添加第2个订阅
+        instance.subscribe(function (newValue) {
+            second = 'second=' + newValue;
+        })
+        instance.notifySubscribers(123);
+
+        assert.equal(first,  'first=123',  '通知订阅者123，第1个订阅返回：first=123');
+        assert.equal(second, 'second=123', '通知订阅者123，第2个订阅返回：second=123');
+    });
+
+
+
+    //监听observalbe对象
+    QUnit.test('监听observable对象', function(assert) {
+
+        var name = ko.observable("ZhangSan");
+        var first;
+        var second;
+
+        name.subscribe(function (newValue) {
+            first = 'first=' + newValue;
+        });
+        name.subscribe(function (newValue) {
+            second = 'second=' + newValue;
+        });
+
+        name('LiSi');
+        assert.equal(first,  'first=LiSi',  '改名为LiSi后，第1个订阅返回：first=LiSi');
+        assert.equal(second, 'second=LiSi', '改名为LiSi后，第2个订阅返回：second=LiSi');
+
+        name('WangWu');
+        assert.equal(first, 'first=WangWu', '改名为WangWu后，第1个订阅返回：first=WangWu');
+        assert.equal(second, 'second=WangWu', '改名为WangWu后，第2个订阅返回：second=WangWu');
+    });
+</script>
+
+</body>
+</html>
