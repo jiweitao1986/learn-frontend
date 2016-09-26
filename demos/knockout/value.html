@@ -9,9 +9,12 @@
 <body>
 
 <h3>text input</h3>
+<p>name: <input data-bind="value: name, style: {borderColor: borderColor}" /></p>
+
+<!--
 <p>name:<span data-bind="text:name"></span></p>
-<p>name: <input data-bind="value: name" /></p>
 <p><button data-bind="click:setName">改名为李四</button></p>
+-->
 
 <!-- <h3>password input</h3>
 <p>name:<span data-bind="text:password"></span></p>
@@ -43,6 +46,7 @@
         remark: ko.observable('张三的备注'),
         gender: ko.observable('male'),
         age: ko.observable(31),
+        borderColor: ko.observable('#f00'),
         setName: function() {
             this.name("李四");
         }

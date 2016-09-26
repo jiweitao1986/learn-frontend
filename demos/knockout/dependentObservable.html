@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>depentObservable</title>
+    <link rel="stylesheet" href="../../common/vendor/qunit/qunit/qunit.css">
+    <script src="../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../common/vendor/qunit/qunit/qunit.js"></script>
+    <script src="../../common/vendor/knockout/dist/knockout.debug.js"></script>
+</head>
+<body>
+
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+<script>
+    QUnit.module('depentObservable');
+
+    //监听subscribeble对象
+    QUnit.test('Test', function(assert) {
+        var observable = new ko.observable(1);
+        var dependentObservable = ko.computed(function() {
+            return observable() + 1;
+        });
+        assert.equal(dependentObservable(),  2,  'observable() + 1 = 2');
+
+        observable(50);
+        assert.equal(dependentObservable(), '51', 'observable() + 1 = 51');
+    });
+
+</script>
+
+</body>
+</html>
