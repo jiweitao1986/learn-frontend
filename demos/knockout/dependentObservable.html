@@ -22,41 +22,44 @@
         var dependentObservable = ko.computed(function() {
             return observable() + 1;
         });
+
+        //1+1
         assert.equal(dependentObservable(),  2,  'observable() + 1 = 2');
 
+        //1+50
         observable(50);
         assert.equal(dependentObservable(), '51', 'observable() + 1 = 51');
     });
 
 
-    //验证写方法
-    QUnit.test('Test', function(assert) {
-        var person = {
-            firstName: ko.observable('Zhang'),
-            lastName: ko.observable('San')
-        }
+    // //验证写方法
+    // QUnit.test('Test', function(assert) {
+    //     var person = {
+    //         firstName: ko.observable('Zhang'),
+    //         lastName: ko.observable('San')
+    //     }
 
-        person.fullName = ko.dependentObservable({
-            read: function() {
-                return this.firstName() + ' ' + this.lastName();
-            },
-            write: function(value) {
-                var separator = ' ';
-                var separatorPos = value.lastIndexOf(separator);
-                if (separatorPos > 0) {
-                    this.firstName(value.substring(0, separatorPos));
-                    this.lastName(value.substring(separatorPos + 1));
-                }
-            },
-            owner: person
-        });
-        assert.equal(person.fullName(),  'Zhang San',  'fullName=Zhang San');
+    //     person.fullName = ko.dependentObservable({
+    //         read: function() {
+    //             return this.firstName() + ' ' + this.lastName();
+    //         },
+    //         write: function(value) {
+    //             var separator = ' ';
+    //             var separatorPos = value.lastIndexOf(separator);
+    //             if (separatorPos > 0) {
+    //                 this.firstName(value.substring(0, separatorPos));
+    //                 this.lastName(value.substring(separatorPos + 1));
+    //             }
+    //         },
+    //         owner: person
+    //     });
+    //     assert.equal(person.fullName(),  'Zhang San',  'fullName=Zhang San');
 
-        person.fullName('Li Si');
-        assert.equal(person.firstName(),  'Li',  'firstName=Li');
-        assert.equal(person.lastName(),  'Si',  'lastName=Si');
+    //     person.fullName('Li Si');
+    //     assert.equal(person.firstName(),  'Li',  'firstName=Li');
+    //     assert.equal(person.lastName(),  'Si',  'lastName=Si');
 
-    });
+    // });
 
 
 </script>
