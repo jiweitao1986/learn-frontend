@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>foreach binding</title>
+    <script src="../../common/vendor/jquery/dist/jquery.js"></script>
+    <!-- <script src="../../common/vendor/knockout/dist/knockout.debug.js"></script> -->
+    <script src="knockout-3.0.0.debug.js"></script>
+</head>
+<body>
+
+<table>
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: people">
+        <tr>
+            <td>
+                <input type="text" data-bind="value: firstName" />
+            </td>
+            <td data-bind="text: firstName"></td>
+        </tr>
+    </tbody>
+</table>
+ 
+<script type="text/javascript">
+    ko.applyBindings({
+        people: [
+            { firstName: ko.observable('Bert'), lastName: 'Bertington' },
+            { firstName: ko.observable('Charles'), lastName: 'Charlesforth' },
+            { firstName: ko.observable('Denise'), lastName: 'Dentiste' }
+        ]
+    });
+</script>
+</body>
+</html>

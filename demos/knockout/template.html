@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>template binding</title>
+    <script src="../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../common/vendor/jquery-tmpl/jquery.tmpl.js"></script>
+    <!-- <script src="../../common/vendor/knockout/dist/knockout.debug.js"></script> -->
+    <script src="old/knockout-3.0.0.debug.js"></script>
+</head>
+<body>
+
+<h2>Participants</h2>
+
+
+<div data-bind="template: { name: 'person-template', foreach: people }"></div>
+ 
+<script type="text/html" id="person-template">
+    <h3><input type="text" data-bind="value:name"></h3>
+    <p>Name: ${name}</span></p>
+    <p>Credits: <span data-bind="text: credits"></span></p>
+</script>
+ 
+ <script>
+     function MyViewModel() {
+         this.people = [
+             { name: ko.observable('Franklin'), credits: 250 },
+             { name: ko.observable('Mario'), credits: 5800 }
+         ]
+     }
+     ko.applyBindings(new MyViewModel());
+ </script>
+
+</body>
+</html>
+
+
+

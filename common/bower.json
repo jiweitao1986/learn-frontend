@@ -30,6 +30,7 @@
     "knockout": "~3.4.0",
     "qunit": "~2.0.1",
     "jasmine-core": "jasmine#~2.5.2",
-    "requirejs": "~2.3.2"
+    "requirejs": "~2.3.2",
+    "jquery-tmpl": "*"
   }
 }
