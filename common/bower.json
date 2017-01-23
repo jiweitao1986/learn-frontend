@@ -32,6 +32,7 @@
     "jasmine-core": "jasmine#~2.5.2",
     "requirejs": "~2.3.2",
     "jquery-tmpl": "*",
-    "angular": "^1.5.9"
+    "angular": "^1.5.9",
+    "bootstrap": "^3.3.7"
   }
 }

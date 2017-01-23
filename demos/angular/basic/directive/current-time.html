@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="timeApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>My Current Time Directive</title>
+
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css" />
+    <script src="../../../../common/vendor/angular/angular.js"></script>
+
+</head>
+
+<body >
+
+<div ng-controller="timeController">
+    Date format: <input ng-model="format"> <hr/>
+    Current time is: <span my-current-time="format"></span>
+</div>
+
+<script type="text/javascript">
+
+    var timeApp = angular.module('timeApp', []);
+
+    timeApp.controller('timeController', function($scope) {
+        $scope.format = 'M/d/yy h:mm:ss a';
+    })
+
+    // Register the 'myCurrentTime' directive factory method.
+    // We inject $timeout and dateFilter service since the factory method is DI.
+
+    timeApp.directive('myCurrentTime', function($timeout, dateFilter) {
+
+        // return the directive link function. (compile function not needed)
+            return function(scope, element, attrs) {
+
+                // date format
+                // timeoutId, so that we can cancel the time updates
+                var format, timeoutId;
+
+                // used to update the UI
+                function updateTime() {
+                    element.text(dateFilter(new Date(), format));
+                }
+
+                // watch the expression, and update the UI on change.
+                scope.$watch(attrs.myCurrentTime, function(value) {
+                    format = value;
+                    updateTime();
+                });
+
+                // schedule update in one second
+                function updateLater() {
+
+                    // save the timeoutId for canceling
+                    timeoutId = $timeout(function() {
+
+                        //update DOM
+                        updateTime();
+
+                        // schedule another update
+                        updateLater();
+                    }, 1000);
+                }
+
+                // listen on DOM destroy (removal) event, and cancel the next UI update
+                // to prevent updating time ofter the DOM element was removed.
+                element.bind('$destroy', function() {
+                    $timeout.cancel(timeoutId);
+                });
+
+                // kick off the UI update process.
+                updateLater();
+            }
+        });
+</script>
+
+
+
+</body>
+</html>

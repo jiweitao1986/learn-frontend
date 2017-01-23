@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="ShoppingCartApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+
+    <link rel="stylesheet" href="../../../common/vendor/bootstrap/dist/css/bootstrap.css" />
+    <script src="../../../common/vendor/angular/angular.js"></script>
+
+</head>
+<body ng-controller="ShoppingCartController">
+
+<h1>Shopping Cart</h1>
+
+<div>
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in items">
+            <td>{{item.name}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.quantity}}</td>
+            <td><a href="#" ng-click="remove($index)">Remove</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p class="add"><a href="#" class="btn btn-primary" role="button">+ Add Item</a></p>
+    <p class="total">Total：<span>{{total()}}</span></p>
+
+</div>
+
+
+
+<script type="text/javascript">
+
+    var app = angular.module('ShoppingCartApp', []);
+
+    app.controller('ShoppingCartController', function($scope) {
+        //数据
+        $scope.items = [
+            {name:'Pro AngularJS',                                        price:10.00, quantity:1},
+            {name:'The Complete Book on AngularJS',                       price:20.00, quantity:2},
+            {name:'AngularJS',                                            price:30.00, quantity:3},
+            {name:'Mastering Web Application Development with AngularJS', price:40.00, quantity:4},
+        ];
+
+        //删除
+        $scope.remove = function(index) {z
+            $scope.items.splice(index, 1);
+        }
+
+        //总金额
+        //$scope.total = 123;
+        $scope.total = function () {
+             var total = 0;
+             var item = null;
+             for (var i=0; i<$scope.items.length; i++) {
+                 item = $scope.items[i];
+                 total += parseFloat(item.price * item.quantity);
+             }
+             return total;
+        }
+    });
+
+</script>
+
+
+</body>
+</html>

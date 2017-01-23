@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="simpleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Service</title>
+
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css" />
+    <script src="../../../../common/vendor/angular/angular.js"></script>
+
+</head>
+<body ng-controller="simpleController">
+
+<p>Name: {{person.name}}</p>
+<p>Gender: {{person.gender}}</p>
+<p>Age: {{person.age}}</p>
+
+<script type="text/javascript">
+
+    var person = {
+        name   : 'ZhanSan',
+        gender : 'male',
+        age    : 28
+    };
+
+    var simpleApp = angular.module('simpleApp', [])
+
+    //服务
+    simpleApp.factory('simpleService', function(){
+        return {
+            changeName: function(person) {
+                person.name = 'LiSi';
+            }
+        }
+    });
+
+    //控制器
+    simpleApp.controller('simpleController', function($scope, simpleService) {
+        $scope.person = person;
+        simpleService.changeName(person);
+    })
+
+</script>
+
+
+</body>
+</html>
