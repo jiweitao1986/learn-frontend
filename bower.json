@@ -33,6 +33,9 @@
     "requirejs": "~2.3.2",
     "jquery-tmpl": "*",
     "angular": "^1.5.9",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "echarts": "^3.4.0",
+    "highcharts": "^5.0.7",
+    "highlight": "^9.9.0"
   }
 }
