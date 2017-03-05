@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>value binding</title>
+
+    <link rel="stylesheet" href="../../common/vendor/bootstrap/dist/css/bootstrap.css">
+
+    <script src="../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../common/vendor/knockout/dist/knockout.debug.js"></script>
+
+</head>
+<body>
+
+
+<h2>嵌套模板</h2>
+
+<ul data-bind="template: { name: 'seasonTemplate', foreach: groups, as: 'group' }"></ul>
+
+<script type="text/html" id="seasonTemplate">
+    <li>
+        <strong data-bind="text: groupName"></strong>
+        <ul data-bind="template: { name: 'monthTemplate', foreach: groupItems, as: 'item' }"></ul>
+    </li>
+</script>
+
+<script type="text/html" id="monthTemplate">
+    <li>
+        <span data-bind="text: name"></span> <span data-bind="text: group.groupName"></span>
+    </li>
+</script>
+
+<h2>模板内使用foreach</h2>
+<ul data-bind="template: { name: 'foreachTemplate', foreach: groups, as: 'group' }"></ul>
+<script type="text/html" id="foreachTemplate">
+    <li>
+        <strong data-bind="text: groupName"></strong>
+        <ul data-bind="foreach: { data: groupItems, as: 'item' }">
+            <li>
+                <span data-bind="text: item.name"></span>
+            </li>
+        </ul>
+    </li>
+</script>
+
+
+
+
+<script>
+    var viewModel = {
+        groups: ko.observableArray([
+            {
+                groupName: '平台与技术部',
+                groupItems: [
+                    {name: '刘一', age: 21},
+                    {name: '陈二', age: 22}
+                ]
+            },
+            {
+                groupName: 'GS产品部',
+                groupItems: [
+                    {name: '张三', age: 21},
+                    {name: '李四', age: 24}
+                ]
+            },
+            {
+                groupName: 'CRM事业部',
+                groupItems: [
+                    {name: '王五', age: 25},
+                    {name: '赵六', age: 26}
+                ]
+            }
+        ])
+    };
+    ko.applyBindings(viewModel);
+</script>
+
+
+</body>
+</html>
