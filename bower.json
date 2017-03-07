@@ -36,6 +36,7 @@
     "bootstrap": "^3.3.7",
     "echarts": "^3.4.0",
     "highcharts": "^5.0.7",
-    "highlight": "^9.9.0"
+    "highlight": "^9.9.0",
+    "moment": "^2.17.1"
   }
 }
