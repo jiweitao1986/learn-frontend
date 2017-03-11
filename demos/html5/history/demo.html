@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <script src="../../../common/vendor/jquery/dist/jquery.js"></script>
+</head>
+<body>
+
+<ul>
+    <li><a id="first-btn">页面1</a></li>
+    <li><a id="second-btn">页面2</a></li>
+    <li><a id="third-btn">页面3</a></li>
+</ul>
+
+<ul>
+    <li><button id="back-btn">后退</button></li>
+    <li><button id="forward-btn">前进</button></li>
+</ul>
+
+<h1 id="page-title">首页</h1>
+<p id="page-content">首页的内容</p>
+
+
+<script>
+    var titleElem = $('#page-title');
+    var contentElem = $('#page-content');
+
+    history.replaceState({
+        url: '#index-page',
+        title: '首页！！！',
+        content: '首页的内容！！！'
+    }, '#index-page');
+
+
+    $('#first-btn').click(function(e) {
+        history.pushState({
+            url: '#first-page',
+            title: '第1个页面',
+            content: '第1个页面的内容'
+        }, '#first');
+        console.log(history);
+    });
+
+    $('#second-btn').click(function(e) {
+        history.pushState({
+            url: '#second-page',
+            title: '第2个页面',
+            content: '第2个页面的内容'
+        }, '#second');
+        console.log(history);
+    });
+
+    $('#third-btn').click(function(e) {
+        history.pushState({
+            url: '#third-page',
+            title: '第3个页面',
+            content: '第3个页面的内容'
+        }, '#thrid');
+        console.log(history);
+    });
+
+    //前进
+    $('#forward-btn').click(function(e) {
+        history.forward()
+    });
+
+    //后退
+    $('#back-btn').click(function(e) {
+        history.back();
+    });
+
+
+    //切换时间处理
+    window.addEventListener('popstate',function(e){
+        var state = e.state;
+        if(state){
+            titleElem.html(state.title);
+            contentElem.html(state.content);
+        }
+        console.log('//////////popstate begin//////////');
+        console.log(e);
+        console.log(state);
+        console.log(history);
+        console.log('//////////popstate end//////////');
+    }, false);
+
+    window.addEventListener('hashchange', function(e) {
+        console.log('//////////haschagne//////////');
+       console.log(e);
+    });
+
+</script>
+
+
+</body>
+</html>
