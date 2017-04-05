@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>handred percent height</title>
+    <style>
+        .demo {
+            margin-bottom:100px;
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+<div class="container">
+
+    <div id="first" class="demo">
+        <h2>页面100%盖度</h2>
+        <dl>
+            <dt>问题描述</dt>
+            <dd>页面跟元素设置height=100%不起作用</dd>
+            <dt>问题分析</dt>
+            <dd>html、body本身没有高度，页面跟元素需要根据body计算，所以无法获取高度。</dd>
+        </dl>
+        <style>
+            html, body {
+                height: 100%;
+            }
+            .container {
+                height:100%;
+                background: #ccc;
+            }
+        </style>
+    </div>
+
+
+
+    <div id="second" class="demo">
+        <h2>父元素设置固定像素高度</h2>
+        <dl>
+            <dt>说明</dt>
+            <dd></dd>
+        </dl>
+        <style type="text/css">
+            #second .parent {
+                height: 200px;
+                border: 1px solid #f00;
+            }
+            #second .child {
+                height: 50%;
+                background: #999;
+                text-align:center;
+                vertical-align: middle;
+            }
+        </style>
+
+        <div class="parent">
+            <div class="child">
+                子元素高度50%
+            </div>
+        </div>
+    </div>
+
+
+    <div id="third" class="demo">
+        <h2>父元素设置百分比高度</h2>
+        <style type="text/css">
+
+            #third .parent {
+                height: 200px;
+                border: 1px solid #f00;
+            }
+            #third .child {
+                height: 50%;
+                background: #999;
+                text-align:center;
+                vertical-align: middle;
+            }
+            #third .grandson {
+                height: 50%;
+                background: #666;
+                text-align:center;
+                vertical-align: middle;
+            }
+        </style>
+
+        <div class="parent" class="demo">
+            <div class="child">
+                <div class="grandson">
+                    child和grandson分别设置高度50%
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
