@@ -19,13 +19,23 @@ $.widget('custom.progressbar', {
         }
     },
 
-    //Set options
+    /**
+     * 设置选项值
+     * @param key
+     * @param value
+     * @private
+     */
     _setOption: function(key, value) {
         this.options[key] = value;
         this._update();
     },
 
-    // Create a private method.
+    /**
+     * 检测值的合法性
+     * @param value
+     * @returns {*}
+     * @private
+     */
     _constrain: function(value) {
         if (value > 100) {
             value = 100;
@@ -36,8 +46,12 @@ $.widget('custom.progressbar', {
         return value;
     },
 
-    //update
+    /**
+     * 更新界面
+     * @private
+     */
     _update: function() {
+        console.log('update ...');
         var progress = this.options.value + "%";
         this.element.find('.progressbar-value').css('width', this.options.value+'%');
         if (this.options.value == 100) {
