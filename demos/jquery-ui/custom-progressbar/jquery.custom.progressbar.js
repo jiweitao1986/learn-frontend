@@ -9,9 +9,14 @@ $.widget('custom.progressbar', {
      * @private
      */
     _create: function() {
+        console.log('_create......');
         this.element.addClass('progressbar');
         this.element.html('<div class="progressbar-value"></div>');
         this._update();
+    },
+
+    _init: function() {
+        console.log('_init......');
     },
 
     /**
