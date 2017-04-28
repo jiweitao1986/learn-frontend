@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>for in</title>
+</head>
+<body>
+
+<script>
+    (function() {
+        var person = {
+            name: 'ZhangSan',
+            gender: 'male',
+            age: '33',
+            nation: 'han'
+        };
+        console.log('//////////');
+        for (var prop in person) {
+            console.log(prop + "=" + person[prop]);
+        }
+    })();
+
+    (function() {
+        function Person()
+        {
+            this.name = 'ZhangSan';
+            this.gender = 'male',
+            this.age = 33,
+            this.nation = 'han'
+            this.eat = function() {
+                console.log('eat');
+            }
+        }
+        Person.prototype = {
+            hands: 2,
+            legs: 2,
+            sleep: function() {
+                console.log('sleep');
+            }
+        }
+
+
+        console.log('//////////');
+        var person = new Person();
+        for (var prop in person) {
+            console.log(prop + "=" + person[prop]);
+        }
+
+
+        console.log('//////////');
+        var person = new Person();
+        for (var prop in person) {
+            if (person.hasOwnProperty(prop)) {
+                console.log(prop + "=" + person[prop]);
+            }
+        }
+    })();
+
+
+
+</script>
+
+
+</body>
+</html>
