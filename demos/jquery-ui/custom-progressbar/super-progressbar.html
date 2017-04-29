@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ProgressBar</title>
+
+    <style rel="stylesheet">
+        .progressbar {
+            height:2em; background:#eee;
+            border:1px solid #ddd;
+            border-radius: 4px;
+        }
+        .progressbar-value {
+            width:0%;
+            height:2em;
+            background-color: orange;
+        }
+    </style>
+
+    <script src="../jquery-ui/external/jquery/jquery.js"></script>
+    <!--<script src="../jquery-ui/jquery-ui.js"></script>-->
+    <script src="jquery.ui.widget.js"></script>
+    <script src="jquery.custom.progressbar.js"></script>
+    <script src="jquery.custom.superprogressbar.js"></script>
+
+
+</head>
+<body>
+
+
+<h1>Super Progressbar</h1>
+
+
+<h2>First Super Progressbar</h2>
+<div id="first-pb"></div>
+<script>
+    var firstPb = $('#first-pb').superprogressbar({value: 30});
+
+    //错误
+    //firstPb.progressbar('value', 70);
+
+    //正确
+    firstPb.superprogressbar('value', 70);
+    
+</script>
+
+<h2>Second Super Progressbar</h2>
+<div id="second-pb"></div>
+<script>
+    var secondPb = $.custom.progressbar({value: 60}, document.getElementById('second-pb'));
+
+    $.custom.progressbar.prototype.reset = function() {
+        this._setOption( "value", 0 );
+    };
+
+    secondPb.reset();
+
+    $('#second-pb').progressbar( "instance" ).value(30);
+
+
+</script>
+
+</body>
+</html>
+
