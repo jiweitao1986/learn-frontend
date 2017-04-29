@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script src="../../../common/vendor/jquery/dist/jquery.js"></script>
+</head>
+<body>
+
+<h2>nowrap（默认值）</h2>
+<dl>
+    <dt>说明</dt>
+    <dd>默认值为nowrap</dd>
+</dl>
+
+<style>
+    #first .parent {
+        display: flex;
+        width: 400px;
+        height: 400px;
+        background-color: lightgray;
+    }
+    #first .child {
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        background-color: red;
+        color: white;
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+
+<div id="first">
+    <div class="parent">
+        <div class="child">Child1</div>
+        <div class="child">Child2</div>
+        <div class="child">Child3</div>
+        <div class="child">Child4</div>
+        <div class="child">Child5</div>
+        <div class="child">Child6</div>
+    </div>
+    <div>
+        <button class="nowrap-btn">nowrap</button>
+        <button class="wrap-btn">nowrap</button>
+        <button class="wrap-reverse-btn">wrap-reverse</button>
+    </div>
+</div>
+
+
+<script>
+    $('#first .nowrap-btn').click(function(e) {
+        $('#first .parent').css('flex-wrap', 'nowrap');
+    });
+    $('#first .wrap-btn').click(function(e) {
+        $('#first .parent').css('flex-wrap', 'wrap');
+    });
+    $('#first .wrap-reverse-btn').click(function(e) {
+        $('#first .parent').css('flex-wrap', 'wrap-reverse');
+    });
+</script>
+
+
+
+</body>
+</html>
