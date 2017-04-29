@@ -2,15 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Test</title>
+    <title>flex-direction</title>
     <script src="../../../common/vendor/jquery/dist/jquery.js"></script>
 </head>
 <body>
 
-<h2>nowrap（默认值）</h2>
+<h2>flex-direction基本用法</h2>
 <dl>
-    <dt>说明</dt>
-    <dd>默认值为nowrap</dd>
+    <dt>row</dt>
+    <dd></dd>
+    <dt>row-reverse</dt>
+    <dd></dd>
+    <dt>column</dt>
+    <dd></dd>
+    <dt>column-reverse</dt>
+    <dd></dd>
 </dl>
 
 <style>
@@ -40,23 +46,54 @@
         <div class="child">Child5</div>
         <div class="child">Child6</div>
     </div>
+    <p>flex-direction:<span class="flex-direction-span">row</span>;</p>
+    <div>
+        <button class="row-btn">row</button>
+        <button class="row-reverse-btn">row-reverse</button>
+        <button class="column-btn">column</button>
+        <button class="column-reverse-btn">column-reverse</button>
+    </div>
+    <p>flex-wrap:<span class="flex-wrap-span">nowrap</span>;</p>
     <div>
         <button class="nowrap-btn">nowrap</button>
-        <button class="wrap-btn">nowrap</button>
+        <button class="wrap-btn">wrap</button>
         <button class="wrap-reverse-btn">wrap-reverse</button>
     </div>
 </div>
 
 
 <script>
+
+    $('#first .row-btn').click(function(e) {
+        $('#first .parent').css('flex-direction', 'row');
+        $('#first .flex-direction-span').text('row');
+    });
+    $('#first .row-reverse-btn').click(function(e) {
+        $('#first .parent').css('flex-direction', 'row-reverse');
+        $('#first .flex-direction-span').text('row-reverse');
+    });
+    $('#first .column-btn').click(function(e) {
+        $('#first .parent').css('flex-direction', 'column');
+        $('#first .flex-direction-span').text('column');
+
+    });
+    $('#first .column-reverse-btn').click(function(e) {
+        $('#first .parent').css('flex-direction', 'column-reverse');
+        $('#first .flex-direction-span').text('column-reverse');
+    });
+
+
     $('#first .nowrap-btn').click(function(e) {
         $('#first .parent').css('flex-wrap', 'nowrap');
+        $('#first .flex-wrap-span').text('nowrap');
     });
     $('#first .wrap-btn').click(function(e) {
         $('#first .parent').css('flex-wrap', 'wrap');
+        $('#first .flex-wrap-span').text('wrap');
     });
     $('#first .wrap-reverse-btn').click(function(e) {
         $('#first .parent').css('flex-wrap', 'wrap-reverse');
+        $('#first .flex-wrap-span').text('wrap-reverse');
     });
 </script>
 

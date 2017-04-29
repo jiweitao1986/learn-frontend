@@ -2,9 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Test</title>
 </head>
 <body>
-$END$
+
+<h2>使用table-cell</h2>
+<dl>
+    <dt>实现原理</dt>
+    <dd>父元素设置为table-cell后vertical-align对其内联子元素生效</dd>
+    <dt>存在问题</dt>
+    <dd>暂无</dd>
+</dl>
+<style>
+    #first .parent {
+        display: flex;
+        width: 600px;
+        height: 600px;
+        background-color: lightgray;
+        flex-wrap: wrap;
+    }
+    #first .child {
+        width: 100px;
+        height: 100px;
+        margin: 20px;
+        background-color: red;
+        color: white;
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+
+<div id="first">
+    <div class="parent">
+        <div class="child">Child1</div>
+        <div class="child">Child2</div>
+        <div class="child">Child3</div>
+        <div class="child">Child4</div>
+        <div class="child">Child5</div>
+        <div class="child">Child6</div>
+    </div>
+</div>
+
 </body>
 </html>

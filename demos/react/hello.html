@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>hello React</title>
+    <meta charset="utf-8">
+    <script src="../../common/vendor/react/react.js"></script>
+    <script src="../../common/vendor/react/react-dom.js"></script>
 </head>
 <body>
-$END$
+<div id="app">
+    <!-- my app renders here -->
+</div>
+
+<script>
+    ReactDOM.render(
+        React.DOM.h1(
+            {
+                id: 'hello-h1',
+                className: 'h1-primary',
+            },
+            React.DOM.span(
+                null, 'hello'
+                "world!"
+        );
+        document.getElementById("app")
+    );
+</script>
 </body>
 </html>

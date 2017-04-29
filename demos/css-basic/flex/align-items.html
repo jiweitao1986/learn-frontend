@@ -1,10 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>align-self的基本使用</title>
+    <style type="text/css" media="screen">
+        #first .parent {
+            border: 1px solid hsla(120,30%,50%,0.8);
+            background-color:hsla(10,80%,10%,0.2);
+            height: 600px;
+            width: 600px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        #first .child {
+            min-width: 100px;
+            min-height: 100px;
+            border: 1px solid hsla(120,30%,50%,0.8);
+            margin: 5px;
+            text-align: center;
+            line-height: 100px;
+            color: #fff;
+            font-weight:bold;
+        }
+    </style>
+    <script src="../../../common/vendor/jquery/dist/jquery.js"></script>
 </head>
 <body>
-$END$
+<h2>align-items基本用法</h2>
+<dl>
+    <dt>flex-start</dt>
+    <dd></dd>
+    <dt>flex-end</dt>
+    <dd></dd>
+    <dt>center</dt>
+    <dd></dd>
+    <dt>baseline</dt>
+    <dd></dd>
+    <dt>stretch</dt>
+    <dd></dd>
+</dl>
+<div id="first">
+    <div class="parent">
+        <div class="child">child1</div>
+        <div class="child">child2</div>
+        <div class="child">child3</div>
+        <div class="child">child4</div>
+        <div class="child">child5</div>
+        <div class="child">child6</div>
+    </div>
+
+    <p>align-items:<span class="align-items-span">flex-start</span>;</p>
+    <div>
+        <button class="flex-start-btn">flex-start-btn</button>
+        <button class="flex-end-btn">flex-end-btn</button>
+        <button class="center-btn">center-btn</button>
+        <button class="baseline-btn">baseline-btn</button>
+        <button class="stretch-btn">stretch</button>
+    </div>
+
+    <p>flex-direction:<span class="flex-direction-span">row</span>;</p>
+    <div>
+        <button class="row-btn">row</button>
+        <button class="row-reverse-btn">row-reverse</button>
+        <button class="column-btn">column</button>
+        <button class="column-reverse-btn">column-reverse</button>
+    </div>
+
+</div>
+
+<script>
+
+    $('#first .flex-start-btn').click(function(e) {
+        $('#first .parent').css('align-items', 'flex-start');
+        $('#first .align-items-span').text('flex-start');
+    });
+
+    $('#first .flex-end-btn').click(function(e) {
+        $('#first .parent').css('align-items', 'flex-end');
+        $('#first .align-items-span').text('flex-end');
+    });
+
+    $('#first .center-btn').click(function(e) {
+        $('#first .parent').css('align-items', 'center');
+        $('#first .align-items-span').text('center');
+    });
+
+    $('#first .baseline-btn').click(function(e) {
+        $('#first .parent').css('align-items', 'baseline');
+        $('#first .align-items-span').text('baseline');
+    });
+    $('#first .stretch-btn').click(function(e) {
+        $('#first .parent').css('align-items', 'stretch');
+        $('#first .align-items-span').text('stretch');
+    });
+
+
+
+
+    $('#first .row-btn').click(function(e) {
+        $('#first .parent').css('flex-direction', 'row');
+        $('#first .flex-direction-span').text('row');
+    });
+    $('#first .row-reverse-btn').click(function(e) {
+        $('#first .parent').css('flex-direction', 'row-reverse');
+        $('#first .flex-direction-span').text('row-reverse');
+    });
+    $('#first .column-btn').click(function(e) {
+        $('#first .parent').css('flex-direction', 'column');
+        $('#first .flex-direction-span').text('column');
+
+    });
+    $('#first .column-reverse-btn').click(function(e) {
+        $('#first .parent').css('flex-direction', 'column-reverse');
+        $('#first .flex-direction-span').text('column-reverse');
+    });
+</script>
+
 </body>
 </html>

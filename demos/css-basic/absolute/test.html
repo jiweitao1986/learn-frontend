@@ -2,9 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Test</title>
 </head>
 <body>
-$END$
+
+
+<h2>跟随性</h2>
+<dl>
+    <dt>说明</dt>
+    <dd>没有设置top、left时，绝对定位的元素还是停留在原来位置，只是不再占据控件。</dd>
+</dl>
+<style>
+    #first .parent {
+        height: 300px;
+        width: 300px;
+        background: #ccc;
+        border: 1px solid #f00;
+    }
+    #first .child {
+        width: 80px;
+        height: 80px;
+        background: #f00;
+    }
+</style>
+<div id="first">
+    <div class="parent">
+        <div class="child">子元素1</div>
+        <div class="child" style="position:absolute;">子元素2</div>
+        <div class="child">子元素3</div>
+    </div>
+</div>
+
 </body>
 </html>
