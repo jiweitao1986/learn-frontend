@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>simple</title>
+</head>
+<body>
+
+<div id="logs-display"></div>
+
+
+<script>
+localStorage.setItem('name', 'ZhangSan');
+var name = localStorage.getItem('name')
+console.log(name);
+
+localStorage.setItem('age', 33);
+var age = localStorage.getItem('age')
+console.log(age);
+
+localStorage.setItem('isMarried', false);
+var isMarried = localStorage.getItem('isMarried')
+console.log(isMarried);
+
+localStorage.setItem('zhang-san', {
+    name: 'ZhangSan',
+    age: 33,
+    isMarried: false
+});
+var zhangSan = localStorage.getItem('zhang-san')
+console.log(zhangSan);
+
+
+localStorage.setItem('li-si', JSON.stringify({
+    name: 'LiSi',
+    age: 44,
+    isMarried: true
+}));
+var liSi = localStorage.getItem('li-si')
+console.log(JSON.parse(liSi));
+
+</script>
+
+
+</body>
+</html>

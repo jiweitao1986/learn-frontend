@@ -1,0 +1,24 @@
+{
+  "name": "learnfrontend",
+  "version": "1.0.0",
+  "description": "Learn FronEnd",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiweitao1986/LearnFrontEnd.git"
+  },
+  "keywords": [
+    "FrontEnd\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C",
+    "Learn",
+    "FrontEnd"
+  ],
+  "author": "jiwt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jiweitao1986/LearnFrontEnd/issues"
+  },
+  "homepage": "https://github.com/jiweitao1986/LearnFrontEnd#readme"
+}

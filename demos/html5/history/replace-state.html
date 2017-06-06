@@ -10,10 +10,9 @@
 <body>
 
 <ul class="nav nav-pills">
-    <li><a id="index-btn">首页</a></li>
     <li><a id="first-btn">页面1</a></li>
     <li><a id="second-btn">页面2</a></li>
-    <li><a id="third-btn">页面3</a></li>
+    <li><a id="third-btn">页面22</a></li>
 </ul>
 
 <ul class="nav nav-pills">
@@ -26,33 +25,8 @@
 
 
 <script>
-    function GetRandomNum(Min,Max)
-    {
-        var Range = Max - Min;
-        var Rand = Math.random();
-        return(Min + Math.round(Rand * Range));
-    }
-
-
     var titleElem = $('#page-title');
     var contentElem = $('#page-content');
-
-    history.replaceState({
-        url: '#index-page',
-        title: '首页',
-        content: '首页的内容'
-    }, '#index-page');
-
-    $('#index-btn').click(function(e) {
-        history.pushState({
-            url: '#index-page',
-            title: '首页',
-            content: '首页的内容'
-        }, '#index');
-        titleElem.html('首页');
-        contentElem.html('首页的内容');
-        console.log(history);
-    })
 
 
     $('#first-btn').click(function(e) {
@@ -78,13 +52,13 @@
     });
 
     $('#third-btn').click(function(e) {
-        history.pushState({
+        history.replaceState({
             url: '#third-page',
-            title: '第3个页面',
-            content: '第3个页面的内容'
+            title: '第22个页面',
+            content: '第22个页面的内容'
         }, '#thrid');
-        titleElem.html('第3个页面');
-        contentElem.html('第3个页面的内容');
+        titleElem.html('第22个页面');
+        contentElem.html('第22个页面的内容');
         console.log(history);
     });
 
