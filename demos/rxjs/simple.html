@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simple</title>
+    <title>Rxjs Simple</title>
     <script src="../../common/js/rxjs/Rx.js"></script>
 </head>
 <body>
@@ -10,24 +10,21 @@
 
 <script>
 
-    var observable = Rx.Observable.create(function (observer) {
-        observer.next(1);
-        observer.next(2);
-        observer.next(3);
-        setTimeout(() => {
-            observer.next(4);
-            observer.complete();
-        }, 1000);
-    });
+var ob = Rx.Observable.of(1, 2);
+console.log(ob);
 
-    console.log('just before subscribe');
-    observable.subscribe({
-        next: x => console.log('got value ' + x),
-        error: err => console.error('something wrong occurred: ' + err),
-        complete: () => console.log('done'),
-    });
-    console.log('just after subscribe');
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
+}
 
+var p = new Person();
+
+// p
+console.log(typeof p);
+
+console.log(p  Person);
 
 </script>
 

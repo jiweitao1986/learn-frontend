@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<script>
+
+    // outer流每发出一个值，则创建一个inner流，同时废弃之前的inner流，并返最新的inner流
+
+    // output
+    // click(19,32)
+    // next: (19,32) 0
+    // click(292,329)
+    // next: (292,329) 0
+    // next: (292,329) 1
+    // next: (292,329) 2
+    var clicks = Rx.Observable.fromEvent(document, 'click');
+    var result = clicks.switchMap((e) => {
+        console.log('click(' + e.clientX + ',' + e.clientY + ')');
+        return Rx.Observable.interval(1000).take(3).map(x=>'(' + e.clientX + ',' + e.clientY + ') ' + x);
+    });
+    result.subscribe({
+        next: x => console.log('next: ' + x),
+        complete: () => console.log('complete'),
+    });
+
+
+    // ////////////////////////////////////////////////////////////////////////////////
+    // output
+    // a1
+    // a2
+    // a3
+    // b1
+    // b2
+    // b3
+    // c1
+    // c2
+    // c3
+    // var letters = Rx.Observable.of('a', 'b', 'c');
+    // var result = letters.mergeMap(x => Rx.Observable.of(x + 1, x + 2, x + 3));
+    // result.subscribe(x => console.log(x));
+
+</script>
+
+
+
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>combineLatest</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+
+<dl>
+    <dt>combineLatest</dt>
+    <dd>1、必须两个流都有值时才会执行；</dd>
+    <dd>2、当任何一个流中有新值时，合并另外一个流的最新值，然后发送出去</dd>
+    <dd>3、project有两个参数，分别是待合并流的最新值</dd>
+</dl>
+
+
+<p>
+    <button id="add-btn">Button1</button>
+    <span id="add-result">1</span>
+</p>
+
+<p>
+    <button id="multiply-btn">Button2</button>
+    <span id="multiply-result">1</span>
+</p>
+
+
+
+<script>
+
+    //OUTPUT:
+    // click the add btn two times,
+    // but the combined observable did't emited a value
+    // because the multiplyBtnClick observable had no value.
+
+    // Add btn clicked: 2
+    // Add btn clicked: 3
+
+
+    // click the multiple btn,
+    // the combined observable emit a value which was calculated from (3*10 = 30)
+    // the latest value of the addBtnClick observable(=3)
+    // and the value of the multipleClick observable (=10)
+    //
+
+    // Multiple btn clicked: 10
+    // combined result: 30
+
+    // Multiple btn clicked: 100
+    // combined result: 300
+
+
+    // click the multiple btn,
+    // the combined observable emit a value which was calculated from (4*100 = 400)
+    // the latest value of the addBtnClick observable(=4)
+    // and the value of the multipleClick observable (=100)
+
+    // Add btn clicked: 4
+    // combined result: 400
+
+    const addBtn = $('#add-btn');
+    const addResult = $('#add-result');
+    const multiplyBtn = $('#multiply-btn')
+    const multiplyResult = $('#multiply-result')
+
+    var addBtnClick = Rx.Observable.fromEvent(addBtn, 'click');
+    var multiplyBtnClick = Rx.Observable.fromEvent(multiplyBtn, 'click');
+
+    var combinedClick = addBtnClick.combineLatest(multiplyBtnClick, (wE, hE) => {
+        return addResult.text() * multiplyResult.text();
+    });
+
+    addBtnClick.subscribe(x => {
+        const result = 1 + parseInt(addResult.text());
+        addResult.text(result);
+        console.log('Add btn clicked: ' + result)
+    });
+    multiplyBtnClick.subscribe(x => {
+        const result = 10 * parseInt(multiplyResult.text());
+        multiplyResult.text(result);
+        console.log('Multiple btn clicked: ' + result)
+    });
+
+    combinedClick.subscribe(x => console.log('combined result: ' + x));
+
+
+
+
+//    var weight = Rx.Observable.of(70, 72, 76, 79, 75);
+//    var height = Rx.Observable.of(1.76, 1.77, 1.78);
+//    var bmi = weight.combineLatest(height, (w, h) => w / (h * h));
+//    bmi.subscribe(x => console.log('BMI is ' + x));
+
+</script>
+
+
+</body>
+</html>

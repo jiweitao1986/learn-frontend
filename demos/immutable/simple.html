@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple</title>
+    <script src="../../common/js/immutable/immutable.js"></script>
+</head>
+<body>
+
+<script>
+
+    (function() {
+        var map1 = Immutable.Map({a:1, b:2, c:3});
+        var map2 = map1.set('b', 50);
+        map1.get('b'); // 2
+        map2.get('b'); // 50
+        console.log(map1 === map2);
+    })();
+
+
+
+
+</script>
+
+</body>
+</html>

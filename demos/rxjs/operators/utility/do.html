@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>do</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<script>
+
+    // outer流每发出一个值，则创建一个inner流，并返回该inner流
+    // subscribe订阅每一个inner流，inner流之间并行执行，直到结束
+    // output
+    // click(216,196)
+    // next: (216,196) 0
+    // click(210,273)
+    // next: (216,196) 1
+    // next: (210,273) 0
+    // next: (216,196) 2
+    // next: (210,273) 1
+    // next: (210,273) 2
+    var observable = Rx.Observable.create(function(observer) {
+        observer.next(1);
+        observer.next(2);
+        observer.next(3);
+        observer.complete();
+    });
+
+    var result = observable.do(function(x) {
+        console.log('do: ' + x);
+    });
+
+    result.subscribe(function(x) {
+        console.log('subscribe: ' + x );
+    })
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>contact</title>
+
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<script>
+
+    //OUTPUT:
+    // 0->1->2->a->b->c
+
+    var timer = Rx.Observable.interval(1000).take(3);
+    var sequence = Rx.Observable.of('a', 'b', 'c');
+    var result = timer.concat(sequence);
+    result.subscribe(x => console.log(x));
+
+</script>
+
+
+</body>
+</html>

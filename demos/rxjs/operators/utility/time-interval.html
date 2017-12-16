@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>min</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<script>
+
+
+Rx.Observable.interval(2000)
+    .skip(1)
+    .take(5)
+    .map(num => new Money('USD', newRandomNumber()))
+    .subscribe(price => {
+        document.querySelector('#price').textContent = price;
+    };
+
+
+</script>

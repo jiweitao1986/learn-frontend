@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<script>
+
+    var letters = Rx.Observable.of('a', 'b', 'c');
+    var numbers = Rx.Observable.of(1, 2, 3);
+    var result = letters.mergeMapTo(numbers );
+    result.subscribe(x => console.log(x));
+
+
+
+</script>
+
+
+
+</body>
+</html>
+
+
+
+

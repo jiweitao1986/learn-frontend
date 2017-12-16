@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axhaustMap</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<dl>
+    <dt>axhuaust</dt>
+    <dd>
+        原始流发送值时，触发新流，只有到新流的值全部发送完成后，原始值得流才会再次触发新流
+    </dd>
+</dl>
+
+
+<script>
+
+    // --------------------------------------------------------------------------------
+    // clicks & interval
+    // --------------------------------------------------------------------------------
+    (function() {
+
+        console.log('----------------------------------------');
+        console.log('(97, 74) 0 --> (97, 74) 1 --> (97, 74) 2');
+        console.log('----------------------------------------');
+
+        var clicks = Rx.Observable.fromEvent(document, 'click');
+        var result = clicks.exhaustMap((ev) => {
+            return Rx.Observable.interval(1000).take(3)
+                .map(x=> '(' + ev.clientX + ',' + ev.clientY + ')' + x);
+        });
+
+        //记录点击
+        clicks.subscribe(ev=>'(' + ev.clientX + ',' + ev.clientY + ')');
+
+        //
+        result.subscribe(x => console.log(x));
+    })();
+</script>
+
+</body>
+</html>

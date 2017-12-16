@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mergeMap</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<script>
+
+    // outer流每发出一个值，则创建一个inner流，多个inner流依次执行
+    // output
+    // click(50,42)
+    // next: (50,42) 0
+    // next: (50,42) 1
+    // next: (50,42) 2
+    // click(331,472)
+    // next: (331,472) 0
+    // next: (331,472) 1
+    // next: (331,472) 2
+    var clicks = Rx.Observable.fromEvent(document, 'click');
+    var result = clicks.concatMap((e) => {
+        console.log('click(' + e.clientX + ',' + e.clientY + ')');
+        return Rx.Observable.interval(1000).take(3).map(x=>'(' + e.clientX + ',' + e.clientY + ') ' + x);
+    });
+
+    result.subscribe({
+        next: x => console.log('next: ' + x),
+        complete: () => console.log('complete'),
+    });
+
+
+</script>
+
+
+</body>
+</html>

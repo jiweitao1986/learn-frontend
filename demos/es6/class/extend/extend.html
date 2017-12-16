@@ -12,8 +12,11 @@
      * 动物
      */
     class Animal {
+
         constructor(name) {
             this.name = name;
+            this.age = 20;
+            this.favorites = [];
         }
 
         intro() {
@@ -56,7 +59,8 @@
 
         eat() {
             super.eat();
-            console.log('I eat earthworms');
+
+            console.log(this.favorites.length + ' eat earthworms');
         }
 
         swim() {

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>withLatestFrom</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<dl>
+    <dt>withLatestFrom</dt>
+    <dd>通过合并【来源流】和【其他流】来创建一个新流</dd>
+    <dd>新流的值是两个流中最新的值</dd>
+    <dd>只有当原始流发送值得时候，新流才会发送值</dd>
+</dl>
+
+<script>
+
+    // --------------------------------------------------------------------------------
+    // OUTPUT:
+    // [0, 1000] --> [1, 1000] --> [3, 1000] --> ...
+    // --------------------------------------------------------------------------------
+    (function() {
+
+        console.log('----------------------------------------');
+        console.log('[0, 1000] --> [1, 1000] --> [3, 1000]');
+        console.log('----------------------------------------');
+
+        let numbers = Rx.Observable.of(10, 100, 1000);
+        let interval = Rx.Observable.interval(1000);
+        let result = interval.withLatestFrom(numbers);
+        result.subscribe(x=>console.log(x));
+
+//        it won't work.
+//        only when the source observable emits a value, the combined observable emits a calculated value.
+//        let result = numbers.withLatestFrom(interval);
+//        result.subscribe(x=>console.log(x));
+
+    })();
+
+
+
+    // --------------------------------------------------------------------------------
+    // OUTPUT:
+    // [1, c] --> [2, c] --> [3, c] --> [4, c]
+    // --------------------------------------------------------------------------------
+
+    (function() {
+
+
+        console.log('----------------------------------------');
+        console.log('[1, c] --> [2, c] --> [3, c] --> [4, c]');
+        console.log('----------------------------------------');
+
+        const numbers = Rx.Observable.of(1, 2, 3, 4);
+        const letters = Rx.Observable.of('a', 'b', 'c');
+        const result = numbers.withLatestFrom(letters);
+        result.subscribe(function(x) {
+            console.log(x);
+        });
+
+    })();
+
+
+
+    // --------------------------------------------------------------------------------
+    // OUTPUT:
+    // [1, c] --> [2, c]
+    // --------------------------------------------------------------------------------
+    (function() {
+
+        console.log('----------------------------------------');
+        console.log('[1, c] --> [2, c]');
+        console.log('----------------------------------------');
+
+        const numbers = Rx.Observable.of(1, 2);
+        const letters = Rx.Observable.of('a', 'b', 'c');
+        const result = numbers.withLatestFrom(letters);
+        result.subscribe(function(x) {
+            console.log(x);
+        });
+    })()
+
+</script>
+
+</body>
+</html>

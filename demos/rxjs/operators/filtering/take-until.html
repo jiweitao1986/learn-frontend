@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<script>
+
+    // ----------------------------------------
+    // 当第二个流发出第一个值得时候，停止源流
+    // ----------------------------------------
+    // OUTPUT:
+    // 0
+    // 1
+    // 2
+    // clicked
+
+    var interval = Rx.Observable.interval(1000);
+    var clicks = Rx.Observable.fromEvent(document, 'click');
+    var result = interval.takeUntil(clicks);
+
+    clicks.subscribe(x=>console.log('clicked'));
+
+    result.subscribe(x => console.log(x));
+
+</script>
+
+
+
+</body>
+</html>
+

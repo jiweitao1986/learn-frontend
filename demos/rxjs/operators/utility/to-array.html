@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>map</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+
+<script>
+
+    // --------------------------------------------------------------------------------
+    // letters to array
+    // --------------------------------------------------------------------------------
+
+    (function() {
+
+        console.log('----------------------------------------');
+        console.log('letters to array');
+        console.log('["a", "b", "c", "d"]');
+
+        var letters = Rx.Observable.of('a', 'b', 'c', 'd');
+        var result = letters.toArray();
+        result.subscribe(
+            x=>console.log(x)
+        );
+
+    })();
+
+
+    // --------------------------------------------------------------------------------
+    // interval to array
+    // --------------------------------------------------------------------------------
+    (function() {
+
+        console.log('----------------------------------------');
+        console.log('interval to array');
+        console.log('[0, 1, 2]');
+
+        var interval = Rx.Observable.interval(1000).take(3);
+        var result = interval.toArray();
+        result.subscribe(
+            x=>console.log(x)
+        );
+
+    })();
+
+
+
+</script>
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>reduce</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<script>
+
+    // ----------------------------------------
+    // 统计5s内的点击数
+    // ----------------------------------------
+    // OUTPUT:
+
+//    var clicksInFiveSeconds = Rx.Observable.fromEvent(document, 'click')
+//        .takeUntil(Rx.Observable.interval(5000));
+//    var ones = clicksInFiveSeconds.mapTo(1);
+//    var seed = 0;
+//    var count = ones.reduce((acc, one) => acc + one, seed);
+//    count.subscribe(x => console.log(x));
+
+
+    // ----------------------------------------
+    // 注意只有源流执行完之后，reduce才会返回唯一的一个累加值
+    // ----------------------------------------
+    // OUTPUT:
+    // 6
+
+//    var numbers = Rx.Observable.from([1, 2, 3]);
+//    var initSum = 0;
+//
+//    var sums = numbers.reduce(function(sum, num) {
+//        return sum + num;
+//    }, initSum);
+//    sums.subscribe(x=>console.log(x));
+
+
+    var candidates = [
+        {name: 'LiuYi',    experience: 'c#,javascript'},
+        {name: 'ChenEr',   experience: 'c#'},
+        {name: 'ZhangSan', experience: 'javascript'},
+        {name: 'LiSi', experience: 'c++'}
+    ]
+    Rx.Observable.from(candidates)
+        .filter(candidate => {
+            const bg = candidate.experience.toLowerCase();
+            return bg.includes('javascript') || bg.includes('c++');
+        })
+        .reduce((acc, obj) => {
+            acc.push(obj.name);
+            return acc;
+        }, [])
+        .subscribe(console.log);
+
+</script>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<script>
+
+    var clicks = Rx.Observable.fromEvent(document, 'click');
+    // Each click event is mapped to an Observable that ticks every second
+    var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000));
+    var switched = higherOrder.switch();
+    // The outcome is that `switched` is essentially a timer that restarts
+    // on every click. The interval Observables from older clicks do not merge
+    // with the current interval Observable.
+    switched.subscribe(x => console.log(x));
+
+</script>
+
+
+
+</body>
+</html>
+
+

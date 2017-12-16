@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>race</title>
+
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<dl>
+    <dt>race</dt>
+    <dd>只有当前正在执行的子流结束时，其他的子流才会被合并进来。</dd>
+</dl>
+
+<script>
+    // OUTPUT
+    // document clicked...（【子流1】创建）
+    // 0
+    // 1
+    // document clicked...（【子流2】创建，【子流1】未结束，【子流2】的值不会被合并）
+    // 2
+    // 3
+    // document clicked...（【子流3】创建，【子流1】未结束，【子流3】值不会被合并）
+    // 4
+    // document clicked...（【子流4】创建，【子流1】结束，【子流4】的值被合并）
+    // 0
+    // 1
+    // 2
+    // 3
+    // 4
+
+    //注意：自流3虽然没有执行，但
+
+    function random(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+    }
+
+    var firstInterval = Rx.Observable.interval(2000).map(x=>'first: ' + x).take(5);
+    var secondInterval = Rx.Observable.interval(1000).map(x=>'second: ' + x).take(5);
+    var thirdInterval = Rx.Observable.interval(500).map(x=>'third: ' + x).take(5);
+
+    var result = firstInterval.race(secondInterval, thirdInterval);
+    result.subscribe(x => {
+        console.log('race:' + x)
+    });
+
+</script>
+
+</body>
+</html>

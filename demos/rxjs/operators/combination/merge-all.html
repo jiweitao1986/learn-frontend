@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<script>
+
+    //--------------------------------------------------------------------------------
+    // 每点击1次，触发一个interval子流，用mergeAll可以将所有这些子流内的值，按时间先后顺序，依次发送到一个新流上去。
+    //--------------------------------------------------------------------------------
+    //OUTPUT:
+    // (60, 118): clicked ......
+    // (60, 118): 0
+    // (60, 118): 1
+    // (93, 216): clicked ......
+    // (60, 118): 2
+    // (93, 216): 0
+    // (60, 118): 3
+    // (93, 216): 1
+    // (60, 118): 4
+    // (93, 216): 2
+    // (93, 216): 3
+    // (93, 216): 4
+    //--------------------------------------------------------------------------------
+
+//    (function() {
+//
+//        var clicks = Rx.Observable.fromEvent(document, 'click');
+//        var higherOrder = clicks.map((e) => {
+//            var position = '(' + e.clientX + ', ' + e.clientY + '): ';
+//            console.log(position + 'clicked......');
+//            return Rx.Observable.interval(1000).take(5).map(x => position + x);
+//        });
+//        var firstOrder = higherOrder.mergeAll();
+//        firstOrder.subscribe(x => console.log(x));
+//
+//    })();
+
+
+    //--------------------------------------------------------------------------------
+    // 每点击1次，触发一个interval子流，用mergeAll可以将所有这些子流内的值，按时间先后顺序，依次发送到一个新流上去。
+    //--------------------------------------------------------------------------------
+    //OUTPUT:
+    // {id: 1, username: 'LiuYi'}
+    //--------------------------------------------------------------------------------
+    (function() {
+        const id$ = Rx.Observable.of({id:1});
+        const username$ = Rx.Observable.of({username:'LiuYi'});
+        const user$ = Rx.Observable.from([id$, username$]);
+
+        // 将所有子流中的值合并到一个线性流中
+        const mergeAll$ = user$.mergeAll();
+
+        // 累加处理
+        const reduce$ = mergeAll$.reduce((acc,one)=> Object.assign(acc,one),{});
+
+
+        reduce$.subscribe(d=>console.log(d));
+    })();
+
+</script>
+
+
+
+</body>
+</html>

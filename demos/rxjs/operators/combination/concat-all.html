@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>contactAll</title>
+
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<script>
+
+    //OUTPUT:
+    //fist click: 0 -> 1 -> 2
+    //second click: 0 -> 1 -> 2
+
+    var clicks = Rx.Observable.fromEvent(document, 'click');
+    var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(3));
+
+    higherOrderLetters.map(x=>Rx.Observable.of('a', 'b', 'c'));
+    higherOrderLetters.contactAll();
+    firstHigherOrderLetters.subscribe(x => console.log(x));
+
+
+    //higherOrder.subscribe(x => console.log(x));
+//
+//    var firstOrder = higherOrder.concatAll();
+//    firstOrder.subscribe(x => console.log(x));
+
+</script>
+
+
+</body>
+</html>

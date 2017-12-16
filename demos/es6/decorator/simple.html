@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple</title>
+</head>
+<body>
+
+<script>
+    @testable
+    class MyTestableClass {
+    }
+
+    function testable(target) {
+        target.isTestable = true;
+    }
+
+    // true
+    console.log(MyTestableClass.isTestable);
+
+
+</script>
+
+
+</body>
+</html>

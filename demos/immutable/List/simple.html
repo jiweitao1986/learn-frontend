@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map</title>
+    <script src="../../../common/js/immutable/immutable.js"></script>
+</head>
+<body>
+
+<script>
+
+    (function() {
+        var chars =  Immutable.List([ 'a', 'b', 'c' ]);
+        chars = chars.set(3, 'd');
+        console.log(chars.get(3));
+
+        chars.forEach(char=> {
+            console.log(char);
+        })
+
+    })();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<script>
+
+
+//--------------------------------------------------------------------------------
+// 将2个流中的值按时间先后依次发送
+//--------------------------------------------------------------------------------
+//
+//OUTPUT:
+//
+//A0 -> A1 -> B0 -> A2 -> A3 ->A4 ->B1 ->A5 -> A6 -> A7 -> B2 -> A8
+//--------------------------------------------------------------------------------
+
+//(function() {
+//
+//    var a = Rx.Observable.interval(1000).map(function(i) {
+//        return 'A' + i;
+//    });
+//    var b = Rx.Observable.interval(3000).map(function(i) {
+//        return 'B' + i;
+//    });
+//    Rx.Observable.merge(a, b).subscribe(function(x) {
+//        console.log(x);
+//    });
+//
+//})();
+
+
+//--------------------------------------------------------------------------------
+// timer每隔1s发出一个值，2s、6s之后点击
+//--------------------------------------------------------------------------------
+//
+//OUTPUT:
+//
+//0 -> 1 -> 2 -> click -> 3 --> 4 -> 5 -> click -> 6 -> 7-> 8 -> 9
+//--------------------------------------------------------------------------------
+
+//(function() {
+//    var clicks = Rx.Observable.fromEvent(document, 'click').map(e=> {
+//        return 'click: (' + e.clientX + ', ' + e.clientY + ')';
+//    });
+//    var timer = Rx.Observable.interval(1000).take(10);
+//    var clicksOrTimer = clicks.merge(timer);
+//    clicksOrTimer.subscribe(x => console.log(x));
+//})();
+
+
+//--------------------------------------------------------------------------------
+// concurrent的作用？？？
+//--------------------------------------------------------------------------------
+//
+//OUTPUT:
+//
+//time1:0 -> time2:0 -> time1:1 -> time1:2 -> time2:1 -> time1:3 -> time1:4
+//        -> time3:0 -> time2:2 -> time3:1 -> time3:2 -> time3:3 -> time3:4
+//--------------------------------------------------------------------------------
+
+(function() {
+    var timer1 = Rx.Observable.interval(1000).take(5).map(x=> 'time1: ' + x);
+    var timer2 = Rx.Observable.interval(2000).take(3).map(x=> 'time2: ' + x);
+    var timer3 = Rx.Observable.interval(500).take(5).map(x=> 'time3: ' + x);
+    var concurrent = 2;
+    var merged = timer1.merge(timer2, timer3, concurrent);
+    merged.subscribe(x => console.log(x));
+})();
+
+
+</script>
+
+
+
+</body>
+</html>

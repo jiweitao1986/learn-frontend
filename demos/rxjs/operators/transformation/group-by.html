@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>map</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+<script>
+    (function() {
+        const numbers = Rx.Observable.from([1, 2, 3, 4, 5]);
+        const result = numbers.groupBy(i => {
+            const flag = i % 2;
+            console.log('groupby: ' + flag);
+            return flag
+        });
+        result.subscribe( x=> {
+            console.log(x)
+            x.subscribe(y=> {
+                console.log(y);
+            })
+        });
+    })();
+</script>
+
+</body>
+</html>

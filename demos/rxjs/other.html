@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple</title>
+    <script src="../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+
+<script>
+
+    // --------------------------------------------------------------------------------
+    // 模拟一个服务
+    // --------------------------------------------------------------------------------
+
+
+    /**
+     * 模拟服务
+     */
+    class MockService {
+
+        /**
+         * 显示正在加载
+         * @param message 提示内容
+         */
+        static showLoading(message) {
+            console.log('----------showLoading----------');
+            console.log(message);
+        }
+
+        /**
+         * 根据用户检查是否有取数权限
+         * @param userId
+         * @returns {boolean}
+         */
+        static checkPermission(userId) {
+            console.log('----------checkPermission----------');
+            console.log('userId: ' + userId);
+            return true;
+        }
+
+        /**
+         * 根据用户获取允许访问的员工ids
+         * @param userId
+         * @returns
+         */
+        static getIds(userId) {
+            console.log('----------getEmpIds----------');
+            console.log('userId: ' + userId);
+            return [3, 4]
+        }
+
+        /**
+         * 根据员工ids获取员工列表
+         * @param empIds
+         * @returns
+         */
+        static getEmps(empIds) {
+            console.log('----------get emps----------');
+            console.log(empIds);
+
+            const emps = [
+                {id: 1, name: '刘一'},
+                {id: 2, name: '陈二'},
+                {id: 3, name: '张三'},
+                {id: 4, name: '李四'},
+                {id: 5, name: '李四'},
+            ]
+            return emps;
+        }
+
+        /**
+         * 隐藏正在加载
+         */
+        static hideLoading() {
+            console.log('----------hide loading----------');
+        }
+    }
+
+
+    // --------------------------------------------------------------------------------
+    // Operation实现
+    // --------------------------------------------------------------------------------
+
+    /**
+     * 抽象基类
+     */
+    class Operation {
+
+        /**
+         * 跳转条件
+         */
+        nextSteps = [];
+
+        /**
+         * 获取下一步
+         */
+        next(context) {
+            nextSteps.forEach( (step, index) =>  {
+
+            })
+        }
+
+        /**
+         * 抽象类：执行操作
+         */
+        execute(context) {
+        }
+
+
+        invoke(serviceName, methodName, methodParams) {
+            //解析methodParams
+        }
+
+
+        /**
+         * 解析参数表达式
+         */
+        parse() {
+
+        }
+    }
+
+
+    /**
+     * 显示正在加载
+     */
+    class ShowLoadingOperation extends Operation {
+
+        nextSteps = [
+            { step: 'checkPermission', condition: true}
+        ]
+
+        execute() {
+            return this.invoke('MockService', 'showLoading', ['请稍等...']);
+        }
+    }
+
+    /**
+     * 检查权限
+     */
+    class CheckPermissionOperation extends Operation {
+
+        nextSteps = [
+            { step: 'loadData',    condition: '{Context~checkPermission} === true'},
+            { step: 'hideLoading', condition: '{Context~checkPermission} === false'}
+        ]
+
+        execute() {
+            return this.invoke('MockService', 'checkPermission', ['{Session~UserId}']);
+        }
+    }
+
+    /**
+     * 获取员工Ids操作
+     */
+    class GetEmpIdsOperation extends Operation {
+
+        nextSteps = [
+            { step: 'getEmps', condition: 'true'},
+        ]
+
+        execute() {
+            return this.invoke('MockService', 'getEmpIds', ['{Session~UserId}']);
+        }
+    }
+
+
+    /**
+     * 获取员工列表操作
+     */
+    class GetEmpsOperation extends Operation {
+
+        nextSteps = [
+            { step: 'hideLoading', condition: 'true'},
+        ]
+
+        execute() {
+            return this.invoke('MockService', 'getEmpIds', ['{Session~UserId}']);
+        }
+    }
+
+    /**
+     * 隐藏正在加载
+     */
+    class HideLoadingOperation extends Operation {
+
+        nextSteps = []
+
+        execute() {
+            return this.invoke('MockService', 'hideLoading', []);
+        }
+    }
+
+
+
+
+    // --------------------------------------------------------------------------------
+    // Command实现
+    // --------------------------------------------------------------------------------
+
+    class Command {
+
+
+        operationVertices = {};
+
+        operationEdges = [];
+
+        operations$;
+
+        flowGraph;
+
+        constructor() {
+
+            // 流程图中的节点
+            //operation instance 通过构造函数注入
+            this.operations = {
+                'showLoading': new ShowLoadingOperation(),
+                'checkPermission': new CheckPermissionOperation(),
+                'getEmpIds': new GetEmpIdsOperation(),
+                'getEmps': new GetEmpsOperation(),
+                'hideLoading': new HideLoadingOperation()
+            }
+
+            //初始context
+            this.context = {};
+
+            //操作流初始化
+            this.operations$ = new Rx.BehaviorSubject();
+
+            //订阅流
+            this.operations$.subscribe(operation => {
+
+                //执行操作：需要传入context，参数中有context变量，需要将最新的context传入，用于解析。
+                this.operations[operation].execute(this.context).subscribe(result=> {
+
+                    // 将执行结果写入context
+                    this.context[operation] = result;
+
+                    //获取下一操作名称
+                    const nextStep = this.flowGraph.getNextVertice(operation, this.context);
+
+                    // 执行操作或结束整个流程
+                    if (nextStep) {
+                        this.operations$.next();
+                    } else {
+                        this.operation$.complete();
+                    }
+
+                });
+            });
+        }
+
+
+        /**
+         * 执行命令
+         */
+        execute() {
+
+            //开始执行第一个操作
+            this.operations$.next(this.flowGraph.getStartingVertice());
+        }
+
+    }
+
+
+    /**
+     * 流程图描述
+     */
+    class CommandFlowGraph {
+
+        /**
+         * 起始节点
+         */
+        startingVertice: 'showLoading';
+
+        /**
+         * 流程图节点
+         */
+        vertices = {
+            'showLoading': new ShowLoadingOperation(),
+            'checkPermission': new CheckPermissionOperation(),
+            'getEmpIds': new GetEmpIdsOperation(),
+            'getEmps': new GetEmpsOperation(),
+            'hideLoading': new HideLoadingOperation()
+        }
+
+
+        /**
+         * 流程图节点之间的连线
+         */
+        edges = [
+            {begin: 'showLoading', end: 'checkPermission', condition: ''},
+            {begin: 'checkPermission', end: 'getEmpIds', condition: '{Context~checkPermission} === true' },
+            {begin: 'checkPermission', end: 'hideLoading', condition: '{Context~checkPermission} === false'},
+            {begin: 'getEmpIds', end: 'getIds', condition: ''},
+            {begin: 'getEmps', end: 'hideLoading', conditions: ''}
+        ]
+
+        /**
+         * 获取起始节点
+         */
+        getStartingVertice() {
+            return this.startingVertice;
+        }
+
+        /**
+         * 获取下一节点
+         */
+        getNextVertice(previousVertice, context) {
+            // 遍历paths，解析condition条件，找到满足条件的下一步
+        }
+
+
+
+        /**
+         * 解析条件表达式
+         */
+        parseCondition(context) {
+
+        }
+    }
+
+
+    // --------------------------------------------------------------------------------
+    // 配置文件
+    // --------------------------------------------------------------------------------
+
+</script>
+
+
+
+
+
+
+</body>
+</html>

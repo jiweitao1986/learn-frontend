@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>combineAll</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+
+<dl>
+    <dt>combineAll</dt>
+    <dd>project函数只有一个参数，该参数是一个数组，是所有子流最新值组成的数组</dd>
+</dl>
+
+
+
+
+<p>
+    <button id="cal-btn">Calculate</button>
+</p>
+
+<p>
+    <button id="add-btn">add</button>
+    <span id="add-span">1</span>
+</p>
+<p>
+    <button id="subtract-btn">subtract</button>
+    <span id="subtract-span">1</span>
+</p>
+<p>
+    <button id="multiple-btn">multiple</button>
+    <span id="multiple-span">1</span>
+</p>
+<p>
+    <button id="divide-btn">Fourth</button>
+    <span id="divide-span">1</span>
+</p>
+
+
+<script>
+
+    const calBtn = $('#cal-btn');
+
+
+    const addBtn = $('#add-btn');
+    const subtractBtn = $('#subtract-btn');
+    const multipleBtn = $('#multiple-btn');
+    const divideBtn = $('#divide-btn');
+
+
+    const addSpan = $('#add-span');
+    const subtractSpan = $('#subtract-span');
+    const multipleSpan = $('#multiple-span');
+    const divideSpan = $('#divide-span');
+
+    var subBtns = [addBtn, subtractBtn, multipleBtn, divideBtn];
+    var subSpans = [addSpan, subtractSpan, multipleSpan, divideSpan];
+
+
+    function add(v) {
+        return v + 1;
+    }
+
+    function subtract(v) {
+        return v - 1;
+    }
+
+    function multiple(v) {
+        return v * 10;
+    }
+
+    function divide(v) {
+        return v / 10;
+    }
+    var subFuncs =[add, subtract, multiple, divide];
+
+
+//    var calClick = Rx.Observable.fromEvent(calBtn, 'click');
+//
+//    var highOrderClick = calClick.map(supE => {
+//
+//        const btn = subBtns.shift();
+//        const span = subSpans.shift();
+//        const func =subFuncs.shift();
+//        const click = Rx.Observable.fromEvent(btn.shift(), 'click');
+//
+//        click.subscribe(subE => {
+//            const result = func(parseInt(span.text()));
+//            span.text(result);
+//            console.log(subE.target);
+//            console.log(result);
+//        });
+//
+//        return click;
+//    }).take(4);
+//    combineClick = highOrderClick.combineAll();
+//
+//    calClick.subscribe(x=>console.log('cal-btn clicked...'));
+
+
+    // 每次点击产生一个['a', 'b', 'c']的Observable
+    // 三次点击完成后，即higherOrder发送了complete之后
+    // 对已经产生的子流进行combineAll
+    // OUTPUT:
+    // document clicked...
+    // document clicked...
+    // document clicked...
+    // ["c", "c", "a"]
+    // ["c", "c", "b"]
+    // ["c", "c", "c"]
+
+    var clicks = Rx.Observable.fromEvent(document, 'click');
+    var higherOrder = clicks.map(ev => {
+        return Rx.Observable.of('a', 'b', 'c');
+    }).take(3);
+
+    var result = higherOrder.combineAll();
+
+    higherOrder.subscribe( x=> console.log('document clicked...'));
+    result.subscribe((x) => console.log(x));
+
+
+//    var numbers = Rx.Observable.from([1, 2, 3]);
+//    var mapInterval = numbers.map(x=>{
+//        const interval = Rx.Observable.interval(x*1000).map(y=>'(number:' + x + ', interval:' + y + ')').take(3);
+//        interval.subscribe(y=>console.log('observable ' + x + ': ' + y));
+//        return interval;
+//    });
+//    var combineInterval = mapInterval.combineAll();
+//    combineInterval.subscribe(x => console.log(x));
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

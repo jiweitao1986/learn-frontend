@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scan</title>
+    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../../common/js/rxjs/Rx.js"></script>
+</head>
+<body>
+
+
+<dl>
+    <dt>scan</dt>
+    <dd>将一个累加器用用到source observable，并产生一个用于发送累加值得新observable</dd>
+    <dd>当source observable发出一个值时，进行一次累加，并将累加值发送出来</dd>
+    <dd>scan和reduce的区别：scan每进行一次聚合，就返回一个值，2、reduce只返回最终的聚合结果，只有一个值</dd>
+</dl>
+
+
+<script>
+
+
+// --------------------------------------------------------------------------------
+// sum
+// --------------------------------------------------------------------------------
+(function() {
+
+    console.log('----------------------------------------');
+    console.log('10 --> 30 --> 60');
+    console.log('----------------------------------------');
+
+    var result = Rx.Observable.of(10, 20, 30).scan(function(sum, cur) {
+        return sum + cur;
+    });
+
+    result.subscribe( function (x) {
+        console.log(x);
+    });
+})()
+
+
+//// --------------------------------------------------------------------------------
+//// avg
+//// --------------------------------------------------------------------------------
+//(function() {
+//    var avg = Rx.Observable.interval(1000)
+//        .scan(function (prev, cur) {
+//            console.log('//////');
+//            console.log(cur);
+//            return {
+//                sum: prev.sum + cur,
+//                count: prev.count + 1
+//            };
+//        }, { sum: 0, count: 0 })
+//        .map(function(o) {
+//            return o.sum / o.count;
+//        });
+//
+//
+//    var subscription = avg.subscribe( function (x) {
+//        console.log(x);
+//    });
+//})()
+//
+//
+//
+//
+//// --------------------------------------------------------------------------------
+//// 简历筛选
+//// --------------------------------------------------------------------------------
+//// OUTPUT:
+//// ["LiuYi"],
+//// ["LiuYi", "ZhangSan"]
+//// ["LiuYi", "ZhangSan", "LiSi"]
+//// --------------------------------------------------------------------------------
+//
+//(function() {
+//    var candidates = [
+//        {name: 'LiuYi',    experience: 'c#,javascript'},
+//        {name: 'ChenEr',   experience: 'c#'},
+//        {name: 'ZhangSan', experience: 'javascript'},
+//        {name: 'LiSi',     experience: 'c++'}
+//    ];
+//    Rx.Observable.from(candidates)
+//        .filter(candidate => {
+//            const bg = candidate.experience.toLowerCase();
+//            return bg.includes('javascript') || bg.includes('c++');
+//        })
+//        .scan((acc, obj) => {
+//            acc.push(obj.name);
+//            return acc;
+//        }, [])
+//        .subscribe(console.log);
+//})()
+
+
+</script>
+
+
+</body>
+</html>
