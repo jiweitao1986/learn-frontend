@@ -13,13 +13,17 @@
 //    console.log(result);
 
 
-    let object = { name: 'ZS', age: 33 };
-    let keyToRemove = 'name';
-    let result = Object.keys(object)
-        .filter(key => key !== keyToRemove)
-        .reduce((result, key) => Object.assign(result, { [key]: object[key] }), {});
+//    let object = { name: 'ZS', age: 33 };
+//    let keyToRemove = 'name';
+//    let result = Object.keys(object)
+//        .filter(key => key !== keyToRemove)
+//        .reduce((result, key) => Object.assign(result, { [key]: object[key] }), {});
+//
+//    console.log(result);
 
-    console.log(result);
+    var key = 'name';
+    var obj = {[key]: 'ZhangSan'};
+    console.log(obj);
 
 </script>
 
