@@ -7,37 +7,34 @@
 <body>
 
 <script>
+
+    // RegExp.prototype.exec()
+    // RegExp.prototype.test()
+
+    // String.prototype.match()
+    // String.prototype.replace()
+    // String.prototype.search()
+    // String.prototype.split()
+
+
     (function(){
 
-        var expression = "{data:EmpModel.Emp.Code} + {data:EmpModel.Emp.Name} + {session:UserID} + {session:UserCode}";
+        const paths = [
+            'variable/a.spec.ts',
+            'viewmodel/a.spec.ts',
+            'DataSource/b.spec.ts'
+        ]
 
-        // 字段解析
-        // var FIELD_PATTERN = /\{data:(\w+).(\w+).(\w+)\}/;
-        // console.log(expression.replace(FIELD_PATTERN, 'AAA'));
-
-
-
-        const sessionNames  = [];
-
-        // 查找所有的session变量
-        const SESSION_PATTERN_G = /\{session:(\w+)\}/g;
-        const sessionVariables = expression.match(SESSION_PATTERN_G);
-        if (sessionVariables === null) {
-            console.log('找不到匹配的变量');
-        }
-
-        // 进一步解析变量名
-        const SESSION_PATTERN = /\{session:(\w+)\}/;
-        sessionVariables.forEach( sessionVariable =>  {
-            const nameMatches = sessionVariable.match(SESSION_PATTERN);
-            if (nameMatches != null && nameMatches.length === 2) {
-                sessionNames.push(nameMatches[1]);
-            }
-        })
+        //const pattern = /^.*\/?(?!.*(DataSource|viewmodel)).*$/;
+        //const pattern = /^(?=variable|data-set).*\.spec\.ts/;
+        const pattern = /^(?!variable|viewmodel).*\.spec\.ts/;
 
 
 
-
+        paths.forEach(path => {
+            const result = pattern.test(path);
+            console.log(path + ': ' + result);
+        });
 
     })();
 </script>

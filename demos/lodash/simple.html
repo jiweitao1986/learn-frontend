@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple</title>
+</head>
+<body>
+
+<script src="../../node_modules/lodash/lodash.js"></script>
+<script>
+
+    // (function() {
+    //     var list = [
+    //         {id: 1, code: 'LiuYi',    name: '刘一'},
+    //         {id: 2, code: 'ChenEr',   name: '陈二'},
+    //         {id: 3, code: 'ZhangSan', name: '张三'},
+    //         {id: 4, code: 'LiSi',     name: '李四'},
+    //     ]
+    //
+    //     var result = _.remove(list, function(item) {
+    //         return item.id === 1;
+    //     });
+    //
+    //     // 返回的是由删除元素组成的数组；
+    //     // 原数组被修改
+    //
+    //     console.log('--------------------remove--------------------');
+    //
+    //     console.log('----------list----------');
+    //     console.log(list);
+    //
+    //     console.log('----------result----------');
+    //     console.log(result);
+    // })();
+    //
+    //
+    // (function() {
+    //     var list = [
+    //         {id: 1, code: 'LiuYi',    name: '刘一'},
+    //         {id: 2, code: 'ChenEr',   name: '陈二'},
+    //         {id: 3, code: 'ZhangSan', name: '张三'},
+    //         {id: 4, code: 'LiSi',     name: '李四'},
+    //     ]
+    //
+    //     var result = _.filter(list, function(item) {
+    //         return item.id === 1;
+    //     });
+    //
+    //     // 返回的是通过筛选的元素组成的数组；
+    //     // 原数组没有被修改
+    //     console.log('--------------------filter--------------------');
+    //
+    //     console.log('----------list----------');
+    //     console.log(list);
+    //
+    //     console.log('----------result----------');
+    //     console.log(result);
+    // })();
+
+
+    (function() {
+        var list = [
+            {id: 1, code: 'LiuYi',    name: '刘一'},
+            {id: 2, code: 'ChenEr',   name: '陈二'},
+            {id: 3, code: 'ZhangSan', name: '张三'},
+            {id: 4, code: 'LiSi',     name: '李四'},
+        ]
+
+        var item = {
+            id: 1,
+            code: 'LiuYi',
+            name: '刘一'
+        };
+
+        _.forEach(item, function(value, key ) {
+            console.log(key);
+            console.log(value);
+        });
+
+        _.forEach(list, function(value, index ) {
+            console.log(index);
+            console.log(value);
+        });
+
+
+    })();
+
+</script>
+</body>
+</html>

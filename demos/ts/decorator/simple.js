@@ -5,7 +5,19 @@
 //  */
 // console.log('\n\n----------Class Extend----------');
 //
-
+// @testable
+// class MyTestableClass {
+//     static isTestable = false;
+// }
+//
+// function testable(target) {
+//     console.log(target.name);
+//     console.log(testable);
+//     target.isTestable = true;
+// }
+//
+//
+// console.log(MyTestableClass.isTestable);
 //
 //
 // /**

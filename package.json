@@ -20,5 +20,18 @@
   "bugs": {
     "url": "https://github.com/jiweitao1986/LearnFrontEnd/issues"
   },
-  "homepage": "https://github.com/jiweitao1986/LearnFrontEnd#readme"
+  "homepage": "https://github.com/jiweitao1986/LearnFrontEnd#readme",
+  "dependencies": {
+    "jasmine": "^2.9.0",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.5",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "ts-node": "^4.1.0",
+    "typescript": "^2.6.2"
+  }
 }

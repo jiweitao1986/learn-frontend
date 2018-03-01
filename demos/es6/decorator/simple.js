@@ -1,21 +1,12 @@
-// @testable
-// class MyTestableClass {
-//     static isTestable = false;
-// }
-//
-// // function testable(target) {
-// //     target.isTestable = true;
-// // }
-//
-// console.log(MyTestableClass.isTestable);
-
-function Effect({dispatch} = {dispatch}) {
-    console.log(dispatch);
+function handlerType(target) {
+    target.__TYPE__ = 'Some Kind';
 }
 
-class CustomEffect {
-
-    @Effect({dispatch: false})
-    load$ = 'aaa';
-
+@handlerType
+class Handler {
+    handle() {
+        console.log('handle');
+    }
 }
+
+console.log(Handler.__TYPE__);

@@ -15,9 +15,6 @@ type K1 = keyof Person;
 type K2 = keyof Person[];  // "length" | "push" | "pop" | "concat" | ...
 type K3 = keyof { [x: string]: Person };  // string
 
-
-console.log(keyof person);
-
 //
 // //const result = keyof Person;
 // //console.log(result);
