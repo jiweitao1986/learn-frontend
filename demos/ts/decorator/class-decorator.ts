@@ -56,8 +56,8 @@ interface HandlerType extends Function {
 }
 
 const map = new Map<string, HandlerType>();
-map.set(RequiredHandler.__TYPE__, RequiredHandler);
-map.set(ValidationHandler.__TYPE__, ValidationHandler);
+map.set(RequiredHandler[__TYPE__], RequiredHandler);
+map.set(ValidationHandler[__TYPE__], ValidationHandler);
 
 // 反射构造
 const handlerType = map.get('validation');

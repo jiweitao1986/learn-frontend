@@ -7,3 +7,13 @@ class Person {
     }
 }
 
+class P {
+    name: string;
+}
+
+class M {
+    name2: string;
+}
+
+const m: M = new P();
+
