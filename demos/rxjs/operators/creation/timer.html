@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Simple</title>
-    <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
-    <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
-    <script src="../../../../common/js/rxjs/Rx.js"></script>
+  <meta charset="UTF-8">
+  <title>Simple</title>
+  <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+  <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+  <script src="../../../../common/js/rxjs/Rx.js"></script>
 </head>
 <body>
 
 <script>
 
-    var timer = Rx.Observable.timer(5000, 1000);
+  // --------------------------------------------------------------------------------
+  // OUTPUT
+  // 0 => complete
+  // 2s之后发出第1个值0，然后流结束发出complete
+  // --------------------------------------------------------------------------------
+  (function () {
+    var timer = Rx.Observable.timer(2000);
     timer.subscribe({
-        next: x => console.log('next: ' + x),
-        error: err => console.error('error: ' + err),
-        complete: () => console.log('complete'),
+      next: x => console.log('next: ' + x),
+      error: err => console.error('error: ' + err),
+      complete: () => console.log('complete'),
     });
+  })();
+
+
+  (function () {
+    // var timer = Rx.Observable.timer(5000, 1000);
+    // timer.subscribe({
+    //   next: x => console.log('next: ' + x),
+    //   error: err => console.error('error: ' + err),
+    //   complete: () => console.log('complete'),
+    // });
+  })();
 
 </script>
-
 
 
 </body>

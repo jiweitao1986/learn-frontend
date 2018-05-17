@@ -33,6 +33,11 @@
      */
     class Bird extends Animal{
 
+        constructor(name, wings) {
+            super(name);
+            this.wings = wings;
+        }
+
         eat() {
             super.eat();
             console.log('I eat bugs.');
@@ -43,7 +48,7 @@
         }
 
         showWings() {
-            console.log('I have wings');
+            console.log('I have ' + this.wings + ' wings');
         }
     }
 
@@ -54,7 +59,7 @@
 
         constructor(name, fins) {
             super(name);
-            this.fins = 4;
+            this.fins = fins;
         }
 
         eat() {
@@ -78,12 +83,17 @@
     dodo.intro();
     dodo.eat();
 
+    var keys = Object.keys(dodo);
+    console.log(keys);
+
     //尼莫
     console.log('//////////Nemo//////////');
     var nemo = new Fish('Nemo');
     nemo.intro();
     nemo.eat();
-    debugger;
+
+
+
 
 </script>
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+  <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+  <script src="../../../../node_modules/rxjs/bundles/Rx.js"></script>
+</head>
+<body>
+
+
+<script>
+
+  //--------------------------------------------------------------------------------
+  // 串联多个操作
+  //--------------------------------------------------------------------------------
+  (function() {
+
+    // 过滤操作
+    var filter =  Rx.operators.filter(x => {
+      return  x % 2 === 0
+    });
+
+    // 显示操作
+    var show = Rx.operators.map(x => {
+      return 'value: ' + x;
+    });
+
+    Rx.Observable.interval(1000)
+      .pipe(
+        filter,
+        show
+      ).subscribe(
+        x => console.log(x)
+      );
+
+  })();
+
+</script>
+
+
+</body>
+</html>

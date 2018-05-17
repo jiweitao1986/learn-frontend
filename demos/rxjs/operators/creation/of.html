@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>of</title>
+</head>
+<body>
+
+
+<link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
+<script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
+<script src="../../../../node_modules/rxjs/bundles/Rx.js"></script>
+<script>
+  Rx.Observable.of(undefined).subscribe(x=> {
+    console.log(x);
+  })
+</script>
+
+</body>
+</html>

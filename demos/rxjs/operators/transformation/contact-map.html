@@ -11,26 +11,50 @@
 
 <script>
 
-    // outer流每发出一个值，则创建一个inner流，多个inner流依次执行
-    // output
-    // click(50,42)
-    // next: (50,42) 0
-    // next: (50,42) 1
-    // next: (50,42) 2
-    // click(331,472)
-    // next: (331,472) 0
-    // next: (331,472) 1
-    // next: (331,472) 2
-    var clicks = Rx.Observable.fromEvent(document, 'click');
-    var result = clicks.concatMap((e) => {
-        console.log('click(' + e.clientX + ',' + e.clientY + ')');
-        return Rx.Observable.interval(1000).take(3).map(x=>'(' + e.clientX + ',' + e.clientY + ') ' + x);
-    });
+  // --------------------------------------------------------------------------------
+  // OUTPUT
+  // a=>b=>c    =>a=>b=>c    a=>b=>c
+  // --------------------------------------------------------------------------------
+  (function() {
+    var numbers = Rx.Observable.of(1, 2, 3);
+    var letters = Rx.Observable.of('a', 'b', 'c');
+    var result = numbers.concatMap(x => {
+      console.log();
+      return letters;
+    })
 
-    result.subscribe({
-        next: x => console.log('next: ' + x),
-        complete: () => console.log('complete'),
-    });
+    result.subscribe(value=> {
+      console.log(value);
+    })
+  })();
+
+  // --------------------------------------------------------------------------------
+  // OUTPUT
+  // outer流每发出一个值，则创建一个inner流，对着多个子流应用contactAll，使子流的值依次发送
+  // output
+  // click(50,42)
+  // next: (50,42) 0
+  // next: (50,42) 1
+  // next: (50,42) 2
+
+  // click(331,472)
+  // next: (331,472) 0
+  // next: (331,472) 1
+  // next: (331,472) 2
+  // --------------------------------------------------------------------------------
+  (function() {
+    // var clicks = Rx.Observable.fromEvent(document, 'click');
+    // var result = clicks.concatMap((e) => {
+    //   console.log('click(' + e.clientX + ',' + e.clientY + ')');
+    //   return Rx.Observable.interval(1000).take(3).map(x=>'(' + e.clientX + ',' + e.clientY + ') ' + x);
+    // });
+    //
+    // result.subscribe({
+    //   next: x => console.log('next: ' + x),
+    //   complete: () => console.log('complete'),
+    // });
+
+  })();
 
 
 </script>

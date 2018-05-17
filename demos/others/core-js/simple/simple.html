@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple</title>
+</head>
+<body>
+
+<!--可用-->
+<!--<script src="../../../../node_modules/core-js/client/core.js"></script>-->
+
+<!--可用-->
+<!--<script src="../../../../node_modules/core-js/client/shim.js"></script>-->
+
+<!--不可用-->
+<!--<script src="../../../../node_modules/core-js/client/library.js"></script>-->
+
+<script>
+    var person = { name: '张三' };
+    var hasName = Reflect.has(person, 'name');
+    alert(hasName);
+</script>
+
+</body>
+</html>
