@@ -41,8 +41,6 @@
     //     // 不工作，因为numbers一次性将3个值释放完，此时interval还没有值，合并流不发送值。
     //     // numbers流释放完3个值后就没有再释放值，而withLastestFrom是依靠numbers流来驱动的。
     //     //let result = numbers.withLatestFrom(interval);
-    //
-    //
     //     result.subscribe(x=>console.log(x));
     //
     // })();

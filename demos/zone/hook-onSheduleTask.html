@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>hook - onScheduleTask</title>
+  <script src="../../node_modules/zone.js/dist/zone.js"></script>
+</head>
+<body>
+
+
+<script>
+
+  // ----------------------------------------
+  // onScheduleTask
+  // 异步任务注册进任务队列时触发，比如调用setTimeout方法
+  // ----------------------------------------
+  //
+  // ----------------------------------------
+  (function(){
+
+    const z = Zone.current.fork({
+      name: 'z',
+      onInvoke(delegate, current, target, callback, ...args) {
+        // console.log(`entering zone '${target.name}'`);
+        // return delegate.invoke(target, callback, ...args);
+      }
+    });
+
+    function b() {
+      console.log();
+    }
+
+    z.run(b);
+
+  })()
+
+</script>
+
+
+
+
+</body>
+</html>

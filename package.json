@@ -37,6 +37,7 @@
     "babel-preset-stage-0": "*",
     "reflect-metadata": "*",
     "ts-node": "*",
-    "typescript": "*"
+    "typescript": "*",
+    "zone.js": "^0.8.26"
   }
 }

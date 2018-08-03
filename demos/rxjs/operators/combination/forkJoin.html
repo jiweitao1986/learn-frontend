@@ -2,9 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>forkJOin</title>
+    <script src="../../../../node_modules/rxjs/bundles/Rx.js"></script>
 </head>
 <body>
+
+
+
+
+
+<script>
+  //--------------------------------------------------------------------------------
+  // forkJoin会等所有的流合并后，将它们最后一个值合并成一个数组，作为合并流的值发送，并立即技术
+  //--------------------------------------------------------------------------------
+  //
+  //OUTPUT:
+  //
+  // [1, 2]
+  //--------------------------------------------------------------------------------
+
+  (function() {
+    var timer1$ = Rx.Observable.interval(1000).take(2);
+    var timer2$ = Rx.Observable.interval(1000).take(3);
+    var empty$  = Rx.Observable.empty();
+
+    var result$  = Rx.Observable.forkJoin(timer1$, timer2$, empty$);
+
+    result$.subscribe({
+      next: (result)=> {
+        console.log(result);
+      },
+      complete: ()=>{
+        console.log('completed');
+      }
+    });
+
+  })();
+
+</script>
 
 </body>
 </html>

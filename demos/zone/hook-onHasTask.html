@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../node_modules/zone.js/dist/zone.js"></script>
+</head>
+<body>
+
+
+<script>
+
+  // ----------------------------------------
+  // onHasTask
+  // 第一个任务加入，最后一个任务离开时
+  // 可以使用onHasTask钩子跟踪整个tasks queue的empty、not-empty状态。
+  // 但不能用它跟踪单个任务。
+  // onHasTask(delegate, currentZone, targetZone, hasTaskState);
+  // currentZone: 当前的zone
+  // targetZone：导致变化的原始zone
+  // type HasTaskState = {
+  //    microTask: boolean;
+  //    macroTask: boolean;
+  //    eventTask: boolean;
+  //    change: 'microTask'|'macroTask'|'eventTask';
+  // }
+  // ----------------------------------------
+  //
+  // ----------------------------------------
+  (function(){
+
+    let timer;
+
+    const z = Zone.current.fork({
+      name: 'z',
+      onHasTask(delegate, current, target, hasTaskState) {
+
+        // 两次执行：
+        // 1、第一个setTimeout声明时；
+        // 2、时间最长的一个setTimeout的callback执行结束时。
+        console.log('执行时间：' + (Date.now() - timer));
+        console.log(hasTaskState);
+      }
+    });
+
+    function a() {
+      console.log('a works ...')
+    }
+    function b() {
+      console.log('b works ...')
+    }
+    function c() {
+      console.log('c works ...')
+    }
+
+    // 入口函数
+    function main() {
+
+      // run时首先执行这句
+      console.log('main works ...');
+      timer = Date.now();
+
+      setTimeout(a, 2000);
+      setTimeout(b, 10000);
+      setTimeout(c, 5000);
+    }
+
+    z.run(main);
+
+  })()
+
+</script>
+
+
+
+
+</body>
+</html>
