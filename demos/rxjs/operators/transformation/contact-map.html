@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>mergeMap</title>
+    <title>concatMap</title>
     <link rel="stylesheet" href="../../../../common/vendor/bootstrap/dist/css/bootstrap.css">
     <script src="../../../../common/vendor/jquery/dist/jquery.js"></script>
     <script src="../../../../common/js/rxjs/Rx.js"></script>
@@ -15,16 +15,50 @@
   // OUTPUT
   // a=>b=>c    =>a=>b=>c    a=>b=>c
   // --------------------------------------------------------------------------------
-  (function() {
-    var numbers = Rx.Observable.of(1, 2, 3);
-    var letters = Rx.Observable.of('a', 'b', 'c');
-    var result = numbers.concatMap(x => {
-      console.log();
-      return letters;
-    })
+  // (function() {
+  //   var numbers = Rx.Observable.of(1, 2, 3);
+  //   var letters = Rx.Observable.of('a', 'b', 'c');
+  //   var result = numbers.concatMap(x => {
+  //     return letters;
+  //   })
+  //
+  //   result.subscribe(value=> {
+  //     console.log(value);
+  //   })
+  // })();
 
-    result.subscribe(value=> {
-      console.log(value);
+
+  (function() {
+    var result;
+    var numbers = Rx.Observable.of(1, 2, 3).do((num)=> {
+      console.log('------------------------------numbers' + num + ' invoked------------------------------')
+    });
+    var letters = Rx.Observable.of('a', 'b', 'c').do((letter)=> {
+      console.log('--------------------letter ' + letter + ' invoked--------------------')
+    });
+    var words   = Rx.Observable.of('first', 'second', 'third').do((word)=> {
+      console.log('----------words ' + word + ' invoked----------')
+    });;
+
+
+    result = numbers.concatMap((num) => {
+      if (num === 2) {
+        return Rx.Observable.empty();
+      }
+      return letters;
+    });
+
+    result = result.concatMap((letter)=> {
+      return words;
+    });
+
+    result.subscribe({
+      next: (value)=> {
+        console.log(value);
+      },
+      complete: () =>{
+        console.log('complete');
+      }
     })
   })();
 

@@ -18,7 +18,7 @@
     var timer = Rx.Observable.interval(1000).take(3);
     var abc = Rx.Observable.of('a', 'b', 'c');
     var def = Rx.Observable.of('d', 'e', 'f');
-    var result = timer.concat(abc, def);
+    var result = timer.concat(abc, empty, def);
     result.subscribe(x => console.log(x));
 
 </script>
