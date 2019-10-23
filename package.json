@@ -28,7 +28,8 @@
     "jquery": "*",
     "lodash": "*",
     "rxjs": "*",
-    "underscore": "*"
+    "underscore": "*",
+    "zone.js": "^0.10.2"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.46",
@@ -37,7 +38,6 @@
     "babel-preset-stage-0": "*",
     "reflect-metadata": "*",
     "ts-node": "*",
-    "typescript": "*",
-    "zone.js": "^0.8.26"
+    "typescript": "*"
   }
 }

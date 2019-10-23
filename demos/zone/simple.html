@@ -1,43 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Zone - Simple</title>
+  <script src="../../node_modules/zone.js/dist/zone.js"></script>
 </head>
+
 <body>
 
 
+  <!-- <script>
+    (function() {
+      let rootZone = Zone.current;
+      let zoneA = rootZone.fork({ name: 'ZoneA'});
+      let zoneB = rootZone.fork({ name: 'ZoneB'});
+      debugger;
+    })();
+  
+  </script> -->
 
-<script>
 
-  // ----------------------------------------
-  // 验证zone的创建
-  // ----------------------------------------
-  // 输出：
-  // AC
-  // B
-  // AC
-  // ----------------------------------------
-  // (function(){
-  //
-  //   const zoneAC = Zone.current.fork({name: 'AC'});
-  //   const zoneB = Zone.current.fork({name: 'B'});
-  //   function c() {
-  //     console.log(Zone.current.name);  // AC
-  //   }
-  //   function b() {
-  //     console.log(Zone.current.name);  // B
-  //     zoneAC.run(c);
-  //   }
-  //   function a() {
-  //     console.log(Zone.current.name);  // AC
-  //     zoneB.run(b);
-  //   }
-  //   zoneAC.run(a);
-  //
-  // })()
+  <script>
+    (function () {
+      var myZoneSpec = {
+        name: 'myZone',
+        // onZoneCreated: function() {
+        //   console.log('onZoneCreated');
+        // },
+        // beforeTask: function() {
+        //   console.log('Beforetask');
+        // },
+        // afterTask: function() {
+        //   console.log('Aftertask');
+        // },
+        // onError: function() {
+        //   console.log('onError');
+        // }
+        onInvoke: function (parentZoneDelegate, currentZone, targetZone, callback, applyThis, applyArgs, source) {
+          
+          console.log(
+            'Zone:', targetZone.name,
+            'Intercepting zone:', currentZone.name,
+            'enter');
+          parentZoneDelegate.invoke(
+            targetZone, callback, applyThis, applyArgs, source);
+          console.log(
+            'Zone:', targetZone.name,
+            'Intercepting zone:', currentZone.name,
+            'leave');
+        },
+        onInvokeTask: function() {
+          console.log('onInvokeTask');
+        }
+      };
 
-</script>
+      function doSomething() {
+        console.log('Async task');
+      }
+
+      function foo() {
+        console.log('foo works');
+      }
+
+      function bar() {
+        console.log('bar works');
+      }
+
+      function baz() {
+        console.log('baz works');
+      }
+
+      function main() {
+        foo();
+        setTimeout(doSomething, 1000);
+        bar();
+        baz();
+        setTimeout(doSomething, 1000);
+      }
+
+
+      var myZone = Zone.current.fork(myZoneSpec);
+      myZone.run(main);
+    })();
+  </script>
+
+
+  <script>
+    // ----------------------------------------
+    // 验证zone的创建
+    // ----------------------------------------
+    // 输出：
+    // AC
+    // B
+    // AC
+    // ----------------------------------------
+    // (function(){
+    //
+    //   const zoneAC = Zone.current.fork({name: 'AC'});
+    //   const zoneB = Zone.current.fork({name: 'B'});
+    //   function c() {
+    //     console.log(Zone.current.name);  // AC
+    //   }
+    //   function b() {
+    //     console.log(Zone.current.name);  // B
+    //     zoneAC.run(c);
+    //   }
+    //   function a() {
+    //     console.log(Zone.current.name);  // AC
+    //     zoneB.run(b);
+    //   }
+    //   zoneAC.run(a);
+    //
+    // })()
+  </script>
 
 
 
@@ -54,4 +130,5 @@
 
 
 </body>
+
 </html>
