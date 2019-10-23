@@ -1,8 +1,0 @@
-[
-    {"id":1, "name": "Iphone 5",  "age": 5, "snippet": "Iphone 5 Iphone 5 Iphone 5 Iphone 5."},
-    {"id":2, "name": "Iphone 4",  "age": 4, "snippet": "Iphone 4Iphone 4Iphone 4Iphone 4"},
-    {"id":3, "name": "Galaxy s5", "age": 5, "snippet": "Galaxy s5 Galaxy s5 Galaxy s5 Galaxy s5."},
-    {"id":4, "name": "Mi 3",      "age": 3, "snippet": "Xiaomi 3 Xiaomi 3 Xiaomi 3 Xiaomi 3."},
-    {"id":5, "name": "Mate 2",    "age": 2, "snippet": "Mate 2 Mate 2 Mate 2 Mate 2 Mate 2."},
-    {"id":6, "name": "Honour x1", "age": 1, "snippet": "Honour x1 Honour x1 Honour x1 Honour x1."}
-]
