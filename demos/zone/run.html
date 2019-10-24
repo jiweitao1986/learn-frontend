@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>run</title>
+  <script src="../../node_modules/zone.js/dist/zone.js"></script>
+</head>
+
+<body>
+
+
+  <script>
+    const rootZone = Zone.current;
+    const parentZone = rootZone.fork({
+      name: 'ParentZone'
+    });
+    const childZone = parentZone.fork({
+      name: 'ChildZone'
+    });
+    const grandZone = parentZone.fork({
+      name: 'GrandZone'
+    });
+    
+  
+  </script>
+
+
+
+
+</body>
+
+</html>
