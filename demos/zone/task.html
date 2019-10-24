@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Zone.js - Task</title>
+  <script src="../../node_modules/zone.js/dist/zone.js"></script>
+</head>
+<body>
+  
+  <button id="click-me-btn">Click Me</button>
+  <script>
+    (function() {
+
+      window.setTimeout.funcName = 'setTimout';
+
+      /**
+       * MacroTask
+       */
+      function setTimeoutFunc() {
+        console.log(`----------setTimeoutFunc----------`);
+
+        setTimeout(function() {
+          console.log(`setTimeoutFunc: callback`);
+        }, 1000);
+      }
+
+      /**
+       * MicroTask
+       */
+      function promiseFunc() {
+        console.log(`----------promiseFunc----------`);
+
+        const promise = Promise.resolve('PromiseValue');
+        promise.then(function(value) {
+          console.log(`promiseFunc: then: ${value}`);
+        });
+      }
+
+      /**
+       * EventTask
+       */
+      function eventFunc() {
+        const btn = document.getElementById('click-me-btn');
+        btn.addEventListener('click', function(e) {
+          console.log(`eventFunc: callback: ${e}`);
+        });
+      }
+
+      /**
+       */
+      function parentMain() {
+        setTimeoutFunc();
+        promiseFunc();
+        eventFunc();
+      }
+
+
+      const parentZoneSpec = {
+        onScheduleTask: function(parentZoneDelegate, currentZone, targetZone, task) {
+          console.log('onScheduleTask');
+          console.log(task);
+          return parentZoneDelegate.scheduleTask(targetZone, task)
+        },
+        onInvokeTask: function(parentZoneDelegate, currentZone, targetZone, task, applyThis, applyArgs) {
+          console.log('onInvokeTask');
+          return parentZoneDelegate.invokeTask(targetZone, task, applyThis, applyArgs);
+        },
+        onHasTask: function(parentZoneDelegate, currentZone, targetZone, hasTaskState) {
+          console.log('onHasTask');
+          console.log(hasTaskState);
+          return parentZoneDelegate.hasTask(targetZone, hasTaskState);
+        }
+      }
+      let parentZone = Zone.current.fork(parentZoneSpec);
+      parentZone.run(parentMain);
+    })();
+  </script>
+</body>
+</html>

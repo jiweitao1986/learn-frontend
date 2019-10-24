@@ -37,20 +37,17 @@
         // onError: function() {
         //   console.log('onError');
         // }
-        onInvoke: function (parentZoneDelegate, currentZone, targetZone, callback, applyThis, applyArgs, source) {
-          
-          console.log(
-            'Zone:', targetZone.name,
-            'Intercepting zone:', currentZone.name,
-            'enter');
+        onInvoke: function (
+          parentZoneDelegate, currentZone, targetZone,
+          callback, applyThis, applyArgs, source
+        ) {
           parentZoneDelegate.invoke(
             targetZone, callback, applyThis, applyArgs, source);
-          console.log(
-            'Zone:', targetZone.name,
-            'Intercepting zone:', currentZone.name,
-            'leave');
         },
-        onInvokeTask: function() {
+        onInvokeTask: function(
+          parentZoneDelegate, currentZone, targetZone,
+          zoneTask, applyThis, appArgs
+        ) {
           console.log('onInvokeTask');
         }
       };
@@ -72,6 +69,7 @@
       }
 
       function main() {
+        console.log(Zone.current.name);
         foo();
         setTimeout(doSomething, 1000);
         bar();

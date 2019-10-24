@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>onInvoke</title>
+  <script src="../../../node_modules/zone.js/dist/zone.js"></script>
+</head>
+<body>
+
+<script>
+
+  // ----------------------------------------
+  // simple
+  // ----------------------------------------
+  //
+  // ----------------------------------------
+  (function(){
+
+    const z = Zone.current.fork({
+      name: 'z',
+      onInvoke(delegate, current, target, callback, ...args) {
+        console.log('OnInvoke');
+      }
+    });
+
+    function main() {
+      console.log('main works ...');
+      console.log(Zone.current.name);
+    }
+
+    z.run(main);
+
+  })()
+
+</script>
+
+
+</body>
+</html>
