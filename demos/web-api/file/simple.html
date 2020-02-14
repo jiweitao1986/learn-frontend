@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <input type="file" id="files-input" multiple >
+  <button id="show-files-btn">Show</button>
+
+  <script>
+    
+    function showFile(file) {
+      var fileReader = new FileReader();
+      fileReader.addEventListener('load', function() {
+        console.log(file.name);
+        console.log(this.result);
+      })
+      fileReader.readAsDataURL(file);
+    }
+    
+    var uploadBtn = document.getElementById('show-files-btn');
+    uploadBtn.addEventListener('click', function() {
+      var filesInput = document.getElementById('files-input');
+      var files = filesInput.files;
+      
+      // Array.from(files);
+      // Array.prototype.forEach.call(files)
+      [].forEach.call(files, function(file) {
+        showFile(file);
+      });
+    })
+  </script>
+  
+</body>
+</html>
