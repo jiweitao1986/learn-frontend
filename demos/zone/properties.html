@@ -15,36 +15,37 @@
     const parentZone = rootZone.fork({
       name: 'ParentZone',
       properties: {
-        parentProp1st: 'parentProp1st',
-        parentProp2nd: 'parentProp2nd',
+        parentProp1st: 'parentProp1stVal',
+        parentProp2nd: 'parentProp2ndVal',
       }
     });
     const childZone = parentZone.fork({
       name: 'ChildZone',
       properties: {
-        childProp1st: 'childProp1st',
-        childProp2nd: 'childProp2nd',
+        childProp1st: 'childProp1stVal',
+        childProp2nd: 'childProp2ndVal',
       }
     });
     const grandZone = parentZone.fork({
       name: 'GrandZone',
       properties: {
-        grandProp1st: 'grandProp1st',
-        grandProp2nd: 'grandProp1st',
+        grandProp1st: 'grandProp1stVal',
+        grandProp2nd: 'grandProp2ndVal',
       }
     });
     
     
     grandZone.run(function() {
-      console.log(Zone.current.name);
-    })
-    
-  
+      const grandProp1st = Zone.current.get('grandProp1st');
+      const grandProp2nd = Zone.current.get('grandProp2nd');
+      console.log(grandProp1st);
+      console.log(grandProp2nd);
+    });
+
   </script>
 
 
 
 
 </body>
-
 </html>

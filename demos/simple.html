@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple</title>
+</head>
+<body>
+
+
+<script>
+
+const guidTpl = `cf6acfc3-84cb-4edc-8d1c-`;
+
+const sqlSet = new Set();
+while(true) {
+  const random = Math.round((Math.random()*1000000000000)).toString();
+  const guid = `cf6acfc3-84cb-4edc-8d1c-${random}`;
+  const sql = `
+  INSERT INTO "cloud1106"."demoscmsalesorder" ("id", "approveby", "approvedate", "billcode", "billstatus", "billtypeid", "employeeid", "flowchartid", "goodtaskstate", "goodsissuestatus", "instanceid", "note", "orderreason", "placedate", "printby", "printdate", "printtimes", "saleschannelid", "salescompanyid", "salesdivisionid", "salesorgid", "soldtoname", "totalamount", "totalquantity") VALUES ('${guid}', '', NULL, 'SD201903200001', '0', '34ed71fe-d90c-4835-9f8f-61270f0e97cf', 'f91e867b-3c0b-4d23-90eb-b96444d79036', '', NULL, '0', '', '', '销售缺货', '2019-03-22', '', NULL, '0', '', '山东济南销售分公司', '', 'eaaad48b-a248-486d-8490-7a631ebe1163', '华润万家', '20000.00000000', '0.00000000');`;
+  sqlSet.add(sql);
+  if (sqlSet.size === 1000) {
+    break;
+  }
+}
+const sqlArray = Array.from(sqlSet);
+console.log(sqlArray.join(''));
+</script>
+
+
+
+</body>
+</html>

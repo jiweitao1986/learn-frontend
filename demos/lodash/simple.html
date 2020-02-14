@@ -59,24 +59,25 @@
 
 
     (function() {
-        var list = [
-            {id: 1, code: 'LiuYi',    name: '刘一'},
-            {id: 2, code: 'ChenEr',   name: '陈二'},
-            {id: 3, code: 'ZhangSan', name: '张三'},
-            {id: 4, code: 'LiSi',     name: '李四'},
-        ]
+
 
         var item = {
             id: 1,
             code: 'LiuYi',
             name: '刘一'
         };
-
         _.forEach(item, function(value, key ) {
             console.log(key);
             console.log(value);
         });
 
+
+        var list = [
+            {id: 1, code: 'LiuYi',    name: '刘一'},
+            {id: 2, code: 'ChenEr',   name: '陈二'},
+            {id: 3, code: 'ZhangSan', name: '张三'},
+            {id: 4, code: 'LiSi',     name: '李四'},
+        ];
         _.forEach(list, function(value, index ) {
             console.log(index);
             console.log(value);

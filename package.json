@@ -23,10 +23,12 @@
   "homepage": "https://github.com/jiweitao1986/LearnFrontEnd#readme",
   "dependencies": {
     "core-js": "*",
+    "date-fns": "^2.9.0",
     "immutable": "*",
     "jasmine": "*",
     "jquery": "*",
-    "lodash": "*",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "rxjs": "*",
     "underscore": "*",
     "zone.js": "^0.10.2"
