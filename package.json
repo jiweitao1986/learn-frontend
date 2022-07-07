@@ -28,7 +28,7 @@
     "jasmine": "*",
     "jquery": "*",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "rxjs": "*",
     "underscore": "*",
     "zone.js": "^0.10.2"
